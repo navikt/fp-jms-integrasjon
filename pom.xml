@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <revision>2.1.0</revision>
+        <revision>1.0.0</revision>
         <sha1></sha1>
         <changelist>-SNAPSHOT</changelist>
         <java.version>11</java.version>
@@ -290,7 +290,7 @@
         <repository>
             <id>github-1</id>
             <name>Github navikt Maven Packages</name>
-            <url>https://maven.pkg.github.com/navikt/fp-felles</url>
+            <url>https://maven.pkg.github.com/navikt/ukelonn-felles</url>
         </repository>
     </distributionManagement>
 </project>

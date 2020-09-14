@@ -1,64 +1,64 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>no.nav.foreldrepenger.ukelonn.felles</groupId>
-		<artifactId>ukelonn-felles-root</artifactId>
-		<version>${revision}${sha1}${changelist}</version>
-	</parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>no.nav.foreldrepenger.ukelonn.felles</groupId>
+        <artifactId>ukelonn-felles-root</artifactId>
+        <version>${revision}${sha1}${changelist}</version>
+    </parent>
 
-	<groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
-	<artifactId>ukelonn-integrasjon-pom</artifactId>
-	<packaging>pom</packaging>
-	<name>Integrasjon</name>
+    <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
+    <artifactId>ukelonn-integrasjon-pom</artifactId>
+    <packaging>pom</packaging>
+    <name>Integrasjon</name>
 
-	<modules>
-		<module>jms</module>
+    <modules>
+        <module>jms</module>
     </modules>
 
-	<properties>
-		<ibmmq.version>9.2.0.0</ibmmq.version>
-		<jms-api.version>2.0.1</jms-api.version>
-	</properties>
+    <properties>
+        <ibmmq.version>9.2.0.0</ibmmq.version>
+        <jms-api.version>2.0.1</jms-api.version>
+    </properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>no.nav.foreldrepenger.felles.integrasjon</groupId>
-				<artifactId>felles-integrasjon-jms</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>no.nav.foreldrepenger.felles.integrasjon</groupId>
+                <artifactId>felles-integrasjon-jms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<!-- JMS -->
-			<dependency>
-				<groupId>javax.jms</groupId>
-				<artifactId>javax.jms-api</artifactId>
-				<version>${jms-api.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm.mq</groupId>
-				<artifactId>com.ibm.mq.allclient</artifactId>
-				<version>${ibmmq.version}</version>
-			</dependency>
+            <!-- JMS -->
+            <dependency>
+                <groupId>javax.jms</groupId>
+                <artifactId>javax.jms-api</artifactId>
+                <version>${jms-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ibm.mq</groupId>
+                <artifactId>com.ibm.mq.allclient</artifactId>
+                <version>${ibmmq.version}</version>
+            </dependency>
 
-		</dependencies>
-	</dependencyManagement>
+        </dependencies>
+    </dependencyManagement>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

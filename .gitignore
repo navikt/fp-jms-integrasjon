@@ -26,7 +26,8 @@ hs_err_pid*
 .idea/*
 *.iml
 
-integrasjon/jms/target/*
+surefire-reports/*
+integrasjon/*/target/*
 
 
 failsafe-summary.xml

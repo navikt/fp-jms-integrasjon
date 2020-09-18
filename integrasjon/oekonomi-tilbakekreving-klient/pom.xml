@@ -9,22 +9,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>journalpost</artifactId>
+    <artifactId>oekonomi-tilbakekreving-klient</artifactId>
     <packaging>jar</packaging>
-    <name>Felles :: Integrasjontjenester - Journalpost</name>
+    <name>Felles :: Integrasjon :: oekonomi-tilbakekreving-klient</name>
 
     <dependencies>
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
+            <groupId>no.nav.tjenester</groupId>
+            <artifactId>tilbakekreving-v1-tjenestespesifikasjon</artifactId>
+            <version>1.0.4</version>
+            <classifier>jaxws</classifier>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.foreldrepenger.felles</groupId>
+            <artifactId>felles-feil</artifactId>
         </dependency>
         <dependency>
             <groupId>no.nav.foreldrepenger.felles.integrasjon</groupId>
-            <artifactId>felles-integrasjon-rest-klient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <artifactId>felles-integrasjon-webservice</artifactId>
         </dependency>
     </dependencies>
+
 </project>

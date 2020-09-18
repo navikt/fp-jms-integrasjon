@@ -11,7 +11,7 @@
 
     <artifactId>journalpost-api-klient</artifactId>
     <packaging>jar</packaging>
-    <name>Felles :: Integrasjon - journalpost-api-klient</name>
+    <name>Felles :: Integrasjon :: journalpost-api-klient</name>
 
     <dependencies>
         <dependency>

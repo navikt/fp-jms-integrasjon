@@ -17,6 +17,7 @@
         <module>dokumentproduksjon-klient-v2</module>
         <module>dokumentproduksjon-klient-v3</module>
         <module>kafka-poller</module>
+        <module>journalpost</module>
     </modules>
 
     <dependencyManagement>

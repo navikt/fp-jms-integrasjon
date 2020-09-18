@@ -14,15 +14,18 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- Eksterne -->
+        <!-- JMS -->
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>com.ibm.mq.allclient</artifactId>
+            <version>9.2.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -43,6 +46,7 @@
         </dependency>
 
     </dependencies>
+
 
     <build>
         <plugins>

@@ -14,31 +14,37 @@
 
     <modules>
         <module>jms</module>
+        <module>dokumentproduksjon-klient-v2</module>
+        <module>dokumentproduksjon-klient-v3</module>
+        <module>kafka-poller</module>
     </modules>
-
-    <properties>
-        <ibmmq.version>9.2.0.0</ibmmq.version>
-        <jms-api.version>2.0.1</jms-api.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>no.nav.foreldrepenger.felles.integrasjon</groupId>
+                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
                 <artifactId>felles-integrasjon-jms</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-            <!-- JMS -->
             <dependency>
-                <groupId>javax.jms</groupId>
-                <artifactId>javax.jms-api</artifactId>
-                <version>${jms-api.version}</version>
+                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
+                <artifactId>dokumentproduksjon-klient-v2</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.mq</groupId>
-                <artifactId>com.ibm.mq.allclient</artifactId>
-                <version>${ibmmq.version}</version>
+                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
+                <artifactId>dokumentproduksjon-klient-v3</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
+                <artifactId>kafka-poller</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
             </dependency>
 
         </dependencies>

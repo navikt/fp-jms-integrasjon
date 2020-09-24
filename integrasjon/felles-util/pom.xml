@@ -9,22 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>journalpost-api-klient</artifactId>
+    <artifactId>felles-util</artifactId>
     <packaging>jar</packaging>
-    <name>Felles :: Integrasjon :: journalpost-api-klient</name>
+    <name>Felles :: Integrasjon :: Felles-util</name>
 
     <dependencies>
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.felles.integrasjon</groupId>
-            <artifactId>felles-integrasjon-rest-klient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
-            <artifactId>felles-util</artifactId>
-        </dependency>
+
     </dependencies>
 </project>

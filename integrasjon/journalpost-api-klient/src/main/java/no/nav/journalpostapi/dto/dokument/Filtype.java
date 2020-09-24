@@ -1,6 +1,6 @@
 package no.nav.journalpostapi.dto.dokument;
 
-import no.nav.journalpostapi.Kode;
+import no.nav.ukelonn.integrasjon.Kode;
 
 public enum Filtype implements Kode {
 

@@ -1,6 +1,6 @@
 package no.nav.journalpostapi.dto.sak;
 
-import no.nav.journalpostapi.Kode;
+import no.nav.ukelonn.integrasjon.Kode;
 
 public enum Sakstype implements Kode {
     FAGSAK,

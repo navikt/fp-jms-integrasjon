@@ -5,7 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import no.nav.ukelonn.integrasjon.serializer.KodelisteSomKodeSerialiserer;
+import no.nav.vedtak.felles.integrasjon.dokdist.serializer.KodelisteSomKodeSerialiserer;
 
 public class Adresse {
 

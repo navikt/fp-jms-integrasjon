@@ -1,4 +1,4 @@
-package no.nav.ukelonn.integrasjon.serializer;
+package no.nav.journalpostapi.dto.serializer;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import no.nav.ukelonn.integrasjon.Kode;
+import no.nav.journalpostapi.dto.Kode;
 
 public class KodelisteSomKodeSerialiserer extends JsonSerializer {
 

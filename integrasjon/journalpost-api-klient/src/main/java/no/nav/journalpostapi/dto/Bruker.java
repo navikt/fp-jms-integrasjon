@@ -2,7 +2,7 @@ package no.nav.journalpostapi.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import no.nav.ukelonn.integrasjon.serializer.KodelisteSomKodeSerialiserer;
+import no.nav.journalpostapi.dto.serializer.KodelisteSomKodeSerialiserer;
 
 public class Bruker {
     private String id;

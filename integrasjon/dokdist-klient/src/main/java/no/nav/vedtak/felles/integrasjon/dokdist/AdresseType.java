@@ -1,8 +1,5 @@
 package no.nav.vedtak.felles.integrasjon.dokdist;
 
-import no.nav.ukelonn.integrasjon.Kode;
-
-
 public enum AdresseType implements Kode {
     NORSK("norskPostadresse"),
     UTENLANDSK("utenlandskPostadresse");

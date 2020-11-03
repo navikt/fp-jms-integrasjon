@@ -1,4 +1,4 @@
-package no.nav.ukelonn.integrasjon;
+package no.nav.journalpostapi.dto;
 
 public interface Kode {
 

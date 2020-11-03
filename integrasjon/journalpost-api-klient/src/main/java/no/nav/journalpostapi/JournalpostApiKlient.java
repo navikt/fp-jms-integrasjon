@@ -10,19 +10,18 @@ import javax.ws.rs.core.UriBuilder;
 import no.nav.journalpostapi.dto.opprett.OpprettJournalpostRequest;
 import no.nav.journalpostapi.dto.opprett.OpprettJournalpostResponse;
 import no.nav.vedtak.felles.integrasjon.rest.OidcRestClient;
-import no.nav.vedtak.felles.integrasjon.rest.SystemUserOidcRestClient;
 
 @ApplicationScoped
 public class JournalpostApiKlient {
 
-    private SystemUserOidcRestClient oidcRestClient; //FIXME denne skal settes til OidcRestClient når journalføring kun utføres i prosesstask
+    private OidcRestClient oidcRestClient;
 
     JournalpostApiKlient() {
         //for CDI proxy
     }
 
     @Inject
-    public JournalpostApiKlient(SystemUserOidcRestClient oidcRestClient) {
+    public JournalpostApiKlient(OidcRestClient oidcRestClient) {
         this.oidcRestClient = oidcRestClient;
     }
 

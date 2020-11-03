@@ -15,8 +15,6 @@
     <modules>
         <module>jms</module>
         <module>kafka-poller</module>
-        <module>dokumentproduksjon-klient-v2</module>
-        <module>dokumentproduksjon-klient-v3</module>
         <module>journalpost-api-klient</module>
         <module>oekonomi-tilbakekreving-klient</module>
     </modules>
@@ -31,16 +29,6 @@
             <dependency>
                 <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
                 <artifactId>kafka-poller</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
-                <artifactId>dokumentproduksjon-klient-v2</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
-                <artifactId>dokumentproduksjon-klient-v3</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

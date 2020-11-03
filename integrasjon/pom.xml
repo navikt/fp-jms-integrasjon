@@ -13,7 +13,6 @@
     <name>Integrasjon</name>
 
     <modules>
-        <module>felles-util</module>
         <module>jms</module>
         <module>kafka-poller</module>
         <module>dokdist-klient</module>
@@ -23,11 +22,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
-                <artifactId>felles-util</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>no.nav.foreldrepenger.felles.ukelonn.integrasjon</groupId>
                 <artifactId>felles-integrasjon-jms</artifactId>

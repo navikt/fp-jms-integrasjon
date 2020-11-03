@@ -16,7 +16,7 @@ import no.nav.journalpostapi.dto.Tema;
 import no.nav.journalpostapi.dto.Tilleggsopplysning;
 import no.nav.journalpostapi.dto.dokument.Dokument;
 import no.nav.journalpostapi.dto.sak.Sak;
-import no.nav.ukelonn.integrasjon.serializer.KodelisteSomKodeSerialiserer;
+import no.nav.journalpostapi.dto.serializer.KodelisteSomKodeSerialiserer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSerialize()

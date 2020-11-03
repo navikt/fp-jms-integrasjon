@@ -1,7 +1,5 @@
 package no.nav.journalpostapi.dto;
 
-import no.nav.ukelonn.integrasjon.Kode;
-
 public enum Journalposttype implements Kode {
     INNGÅENDE("INNGAAENDE"),
     UTGÅENDE("UTGAAENDE"),

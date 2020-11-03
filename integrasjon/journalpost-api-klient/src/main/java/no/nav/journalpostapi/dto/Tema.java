@@ -1,6 +1,6 @@
 package no.nav.journalpostapi.dto;
 
-import no.nav.journalpostapi.Kode;
+import no.nav.ukelonn.integrasjon.Kode;
 
 /**
  * se https://confluence.adeo.no/display/BOA/Tema

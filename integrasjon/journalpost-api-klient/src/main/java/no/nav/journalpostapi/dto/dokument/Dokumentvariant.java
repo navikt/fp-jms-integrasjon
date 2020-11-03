@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import no.nav.journalpostapi.dto.serializer.ByteArraySomBase64StringSerializer;
-import no.nav.journalpostapi.dto.serializer.KodelisteSomKodeSerialiserer;
+import no.nav.ukelonn.integrasjon.serializer.KodelisteSomKodeSerialiserer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Dokumentvariant {

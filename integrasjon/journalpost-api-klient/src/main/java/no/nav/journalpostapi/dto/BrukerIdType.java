@@ -1,6 +1,6 @@
 package no.nav.journalpostapi.dto;
 
-import no.nav.journalpostapi.Kode;
+import no.nav.ukelonn.integrasjon.Kode;
 
 public enum BrukerIdType implements Kode {
     NorskIdent("FNR"),

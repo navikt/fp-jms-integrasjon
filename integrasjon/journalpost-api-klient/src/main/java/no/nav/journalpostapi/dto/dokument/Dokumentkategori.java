@@ -1,6 +1,6 @@
 package no.nav.journalpostapi.dto.dokument;
 
-import no.nav.journalpostapi.Kode;
+import no.nav.ukelonn.integrasjon.Kode;
 
 /**
  * https://confluence.adeo.no/display/BOA/Dokumentkategori

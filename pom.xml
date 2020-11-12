@@ -29,7 +29,7 @@
 
         <logback.version>1.2.3</logback.version>
 
-        <felles.version>2.4.0-20201111085845-c7877a2</felles.version>
+        <felles.version>2.4.0-20201112151243-db36f12</felles.version>
 
     </properties>
 

@@ -34,7 +34,6 @@ jobs:
       - name: Build & test
         shell: bash
         run: |
-          set -x
           echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
           mvn test -e --batch-mode --settings ./.m2/settings.xml --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
           echo "Deployed artifacts"

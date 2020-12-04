@@ -36,7 +36,7 @@ jobs:
         run: |
           set -x
           echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
-          mvn deploy -e --batch-mode --settings ./.m2/settings.xml --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
+          mvn test  -e --batch-mode --settings ./.m2/settings.xml --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
           echo "MVN_VERSION=$(mvn help:evaluate --batch-mode --settings ./.m2/settings.xml --file .flattened -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
           echo "Deployed artifacts"
         env:

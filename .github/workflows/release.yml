@@ -25,16 +25,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Publish artifact
-        # The GITHUB_REF tag comes in the format 'refs/tags/xxx'.
-        # So if we split on '/' and take the 3rd value, we can get the release name.
+        env:
+          NEW_VERSION: ${{ github.event.release.tag_name }}
+          GITHUB_USERNAME: x-access-token
+          GITHUB_PASSWORD: ${{ secrets.UL_ACCESS_TOKEN }}
         run: |
-          REPO_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}')
-          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-          echo "-- Setting new release version ${NEW_VERSION} for ${REPO_NAME} --"
-          mvn  --settings ./.m2/settings.xml  versions:set -DnewVersion="${NEW_VERSION}" -DgenerateBackupPoms=false
-          echo "-- Deploy release to GPR --"
-          mvn   --settings ./.m2/settings.xml clean deploy -Dmaven.wagon.http.pool=false
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions release"
+          mvn  --settings ./.m2/settings.xml --batch-mode  -DreleaseVersion=${NEW_VERSION}  release:prepare release:perform
+               
+      - name: Rollback release ved feil
+        if: failure()
         env:
           GITHUB_USERNAME: x-access-token
           GITHUB_PASSWORD: ${{ secrets.UL_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions release"
+          mvn  --settings ./.m2/settings.xml  release:rollback     

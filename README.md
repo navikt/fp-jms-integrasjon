@@ -1,2 +1,2 @@
-# ukelonn-felles
-Kode som er delt mellom applikasjoner som Team Ukelønn eier
+Inneholder jms-integrasjonskode som deles mellom Foreldrepenger/K9/familie.
+

@@ -27,7 +27,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</connection>
-        <developerConnection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</developerConnection>   
         <url>https://github.com/navikt/familie-jms-integrasjon/</url>
     </scm>
 

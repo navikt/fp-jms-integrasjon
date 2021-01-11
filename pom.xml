@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>no.nav.vedtak.felles</groupId>
+    <groupId>no.nav.vedtak.felles.familie-jms-integrasjon</groupId>
     <artifactId>jms-integrasjon</artifactId>
     <version>${revision}${sha1}${changelist}</version>
     <packaging>jar</packaging>
@@ -26,9 +26,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/navikt/ukelonn-felles.git</connection>
-        <developerConnection>scm:git:https://github.com/navikt/ukelonn-felles.git</developerConnection>
-        <url>https://github.com/navikt/ukelonn-felles/</url>
+        <connection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</connection>
+        <developerConnection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</developerConnection>
+        <url>https://github.com/navikt/familie-jms-integrasjon/</url>
     </scm>
 
     <dependencies>
@@ -168,7 +168,7 @@
         <repository>
             <id>github-1</id>
             <name>Github navikt Maven Packages</name>
-            <url>https://maven.pkg.github.com/navikt/ukelonn-felles</url>
+            <url>https://maven.pkg.github.com/navikt/familie-jms-integrasjon</url>
         </repository>
     </distributionManagement>
 </project>

@@ -6,8 +6,8 @@ import static org.mockito.Mockito.verify;
 
 import javax.jms.JMSContext;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("resource")
 public class ClientAckSessionModeStrategyTest {
@@ -16,7 +16,7 @@ public class ClientAckSessionModeStrategyTest {
 
     private JMSContext mockJMSContext;
 
-    @Before
+    @BeforeEach
     public void setup() {
         strategy = new ClientAckSessionModeStrategy();
         mockJMSContext = mock(JMSContext.class);

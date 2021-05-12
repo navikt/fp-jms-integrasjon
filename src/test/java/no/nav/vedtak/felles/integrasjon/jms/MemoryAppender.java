@@ -1,4 +1,4 @@
-package no.nav.vedtak.log.util;
+package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.Collections;
 import java.util.List;

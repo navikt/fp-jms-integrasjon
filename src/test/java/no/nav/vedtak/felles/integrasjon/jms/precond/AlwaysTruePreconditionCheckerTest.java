@@ -2,7 +2,7 @@ package no.nav.vedtak.felles.integrasjon.jms.precond;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AlwaysTruePreconditionCheckerTest {
 

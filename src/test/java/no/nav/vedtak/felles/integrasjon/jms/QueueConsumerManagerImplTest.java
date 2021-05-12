@@ -5,14 +5,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.inject.Instance;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 public class QueueConsumerManagerImplTest {
 
@@ -25,7 +24,7 @@ public class QueueConsumerManagerImplTest {
 
     private QueueConsumerManagerImpl manager; // the object we're testing
 
-    @Before
+    @BeforeEach
     public void setup() {
         manager = new TestQueueConsumerManagerImpl();
     }

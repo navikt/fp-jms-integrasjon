@@ -2,49 +2,56 @@ package no.nav.vedtak.felles.integrasjon.jms.pausing;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import no.nav.modig.core.test.LogSniffer;
+import ch.qos.logback.classic.Level;
+import no.nav.vedtak.felles.integrasjon.jms.MemoryAppender;
 
 public class DefaultErrorHandlingStrategyTest {
 
     private DefaultErrorHandlingStrategy strategy; // the object we're testing
 
-    @Rule
-    public final LogSniffer logSniffer = new LogSniffer();
+    private static MemoryAppender logSniffer;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    public void setUp() {
+        logSniffer = MemoryAppender.sniff(DefaultErrorHandlingStrategy.class);
         strategy = new DefaultErrorHandlingStrategy();
+    }
+
+    @AfterEach
+    public void afterEach() {
+        logSniffer.reset();
     }
 
     @Test
     public void test_handleExceptionOnCreateContext() {
         Exception e = new RuntimeException("oida");
         doAndAssertPause(() -> strategy.handleExceptionOnCreateContext(e));
-        logSniffer.assertHasErrorMessage("F-158357");
+        Assertions.assertThat(logSniffer.search("F-158357", Level.ERROR)).hasSize(1);
     }
 
     @Test
     public void test_handleUnfulfilledPrecondition() {
         doAndAssertPause(() -> strategy.handleUnfulfilledPrecondition("test_handleUnfulfilledPrecondition"));
-        logSniffer.assertHasErrorMessage("F-310549");
+        Assertions.assertThat(logSniffer.search("F-310549", Level.ERROR)).hasSize(1);
     }
 
     @Test
     public void test_handleExceptionOnReceive() {
         Exception e = new RuntimeException("uffda");
         doAndAssertPause(() -> strategy.handleExceptionOnReceive(e));
-        logSniffer.assertHasErrorMessage("F-266229");
+        Assertions.assertThat(logSniffer.search("F-266229", Level.ERROR)).hasSize(1);
     }
 
     @Test
     public void test_handleExceptionOnHandle() {
         Exception e = new RuntimeException("auda");
         doAndAssertPause(() -> strategy.handleExceptionOnHandle(e));
-        logSniffer.assertHasErrorMessage("F-848912");
+        Assertions.assertThat(logSniffer.search("F-848912", Level.ERROR)).hasSize(1);
     }
 
     private void doAndAssertPause(Runnable pausingAction) {

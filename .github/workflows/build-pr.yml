@@ -23,8 +23,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '16'
-          check-latest: true
+          java-version: 16
       - name: Build
         shell: bash
         run: |

@@ -11,7 +11,7 @@ import no.nav.vedtak.felles.integrasjon.jms.exception.KritiskJmsException;
  * <p>
  * De enkelte meldingskøene har sin konkrete sub-klasse, med konfigurasjonsverdier for selve køen.
  */
-public class BaseJmsKonfig implements JmsKonfig {
+public abstract class BaseJmsKonfig implements JmsKonfig {
 
     public static final String JNDI_JMS_CONNECTION_FACTORY = "jms/ConnectionFactory";
 
@@ -34,7 +34,7 @@ public class BaseJmsKonfig implements JmsKonfig {
     }
 
     protected String getProperty(String key) {
-        String val = System.getProperty(key);
+        var val = System.getProperty(key);
         if (val == null || val.isEmpty()) {
             val = System.getenv(key.toUpperCase().replace('.', '_'));
             if (val == null || val.isEmpty()) {
@@ -45,7 +45,7 @@ public class BaseJmsKonfig implements JmsKonfig {
     }
 
     protected int getPropertyInt(String key) {
-        String value = getProperty(key);
+        var value = getProperty(key);
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -93,18 +93,6 @@ public class BaseJmsKonfig implements JmsKonfig {
         return MQ_GATEWAY_PREFIX + ".port"; //$NON-NLS-1$
     }
 
-    @Override
-    public String getQueueManagerUsername() {
-        // return getProperty(getQueueManagerUsernamePropertyKey()); //NOSONAR
-        // TODO (rune) ta fra ekstern kilde når det nye sikkehetsregimet er på plass
-
-        return "srvappserver";
-    }
-
-    public String getQueueManagerUsernamePropertyKey() {
-        return MQ_GATEWAY_PREFIX + ".username"; //$NON-NLS-1$
-    }
-
     public static String getQueueManagerPropertyPrefix() {
         return MQ_GATEWAY_PREFIX;
     }
@@ -125,7 +113,7 @@ public class BaseJmsKonfig implements JmsKonfig {
 
     @Override
     public String getReplyToQueueName() {
-        String propertyName = replyToQueueKeyPrefix + ".queueName";
+        var propertyName = replyToQueueKeyPrefix + ".queueName";
         return getProperty(propertyName);
     }
 
@@ -143,10 +131,6 @@ public class BaseJmsKonfig implements JmsKonfig {
 
     public void setQueueManagerPort(int value) {
         setProperty(getQueueManagerPortPropertyKey(), Integer.toString(value));
-    }
-
-    public void setQueueManagerUsername(String value) {
-        setProperty(getQueueManagerUsernamePropertyKey(), value);
     }
 
     public void setQueueName(String value) {
@@ -171,7 +155,7 @@ public class BaseJmsKonfig implements JmsKonfig {
         } else if (obj == null || !getClass().equals(obj.getClass())) {
             return false;
         }
-        BaseJmsKonfig other = (BaseJmsKonfig) obj;
+        var other = (BaseJmsKonfig) obj;
         return Objects.equals(getQueueName(), other.getQueueName())
                 && Objects.equals(getQueueManagerChannelName(), other.getQueueManagerChannelName())
                 && Objects.equals(getQueueManagerHostname(), other.getQueueManagerHostname())

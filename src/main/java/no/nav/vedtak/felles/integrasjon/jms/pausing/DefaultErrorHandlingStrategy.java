@@ -33,9 +33,9 @@ public class DefaultErrorHandlingStrategy {
 
 
     public void handleExceptionOnCreateContext(Exception e) {
-        CharSequence mqErrorText = MQExceptionUtil.extract(e);
+        var mqErrorText = MQExceptionUtil.extract(e);
         logger.error("F-158357 Klarte ikke å connecte til MQ server: " + mqErrorText, e);
-        long pauseLength = backoffHandlerExceptionOnCreateContext.getNextPauseLengthInMillisecs();
+        var pauseLength = backoffHandlerExceptionOnCreateContext.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
 
@@ -45,7 +45,7 @@ public class DefaultErrorHandlingStrategy {
 
     public void handleUnfulfilledPrecondition(String errorMessage) {
         logger.error("F-310549 Precondition ikke oppfyllt: {}", errorMessage);
-        long pauseLength = backoffHandlerUnfulfilledPrecondition.getNextPauseLengthInMillisecs();
+        var pauseLength = backoffHandlerUnfulfilledPrecondition.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
 
@@ -55,9 +55,9 @@ public class DefaultErrorHandlingStrategy {
     }
 
     public void handleExceptionOnReceive(Exception e) {
-        CharSequence mqErrorText = MQExceptionUtil.extract(e);
+        var mqErrorText = MQExceptionUtil.extract(e);
         logger.error("F-266229 Uventet feil ved mottak av melding: " + mqErrorText, e);
-        long pauseLength = backoffHandlerExceptionOnReceive.getNextPauseLengthInMillisecs();
+        var pauseLength = backoffHandlerExceptionOnReceive.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
 
@@ -66,9 +66,9 @@ public class DefaultErrorHandlingStrategy {
     }
 
     public void handleExceptionOnHandle(Exception e) {
-        CharSequence mqErrorText = MQExceptionUtil.extract(e);
+        var mqErrorText = MQExceptionUtil.extract(e);
         logger.error("F-848912 Uventet feil ved håndtering av melding: " + mqErrorText, e);
-        long pauseLength = backoffHandlerExceptionOnHandle.getNextPauseLengthInMillisecs();
+        var pauseLength = backoffHandlerExceptionOnHandle.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
 

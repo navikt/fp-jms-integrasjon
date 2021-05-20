@@ -23,7 +23,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
 
     public boolean contains(String string, Level level) {
         return this.list.stream()
-                .anyMatch(event -> event.getMessage().toString().contains(string)
+                .anyMatch(event -> event.getMessage().contains(string)
                         && event.getLevel().equals(level));
     }
 
@@ -39,7 +39,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
 
     public List<ILoggingEvent> search(String string) {
         return this.list.stream()
-                .filter(event -> event.getMessage().toString().contains(string))
+                .filter(event -> event.getMessage().contains(string))
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +49,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
 
     public List<ILoggingEvent> search(String string, Level level) {
         return this.list.stream()
-                .filter(event -> event.getMessage().toString().contains(string)
+                .filter(event -> event.getMessage().contains(string)
                         && event.getLevel().equals(level))
                 .collect(Collectors.toList());
     }
@@ -80,7 +80,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
     }
 
     public static MemoryAppender sniff(org.slf4j.Logger logger) {
-        var log = Logger.class.cast(logger);
+        var log = (Logger) logger;
         log.setLevel(Level.INFO);
         var sniffer = new MemoryAppender(log.getName());
         log.addAppender(sniffer);

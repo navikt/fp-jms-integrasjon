@@ -27,23 +27,20 @@ public class ExternalSelftestQueueProducerTest {
     private ExternalQueueProducer helper; // the object we're testing
     private JMSContext mockContext;
     private Queue mockQueue;
-    private JMSConsumer mockConsumer;
     private JMSProducer mockProducer;
-    private QueueBrowser mockBrowser;
     private TextMessage mockMessage;
-    private Session session;
 
     @BeforeEach
     public void setup() throws JMSException {
 
         mockContext = mock(JMSContext.class);
         mockQueue = mock(Queue.class);
-        mockConsumer = mock(JMSConsumer.class);
+        var mockConsumer = mock(JMSConsumer.class);
         mockProducer = mock(JMSProducer.class);
         mockMessage = mock(TextMessage.class);
-        mockBrowser = mock(QueueBrowser.class);
+        var mockBrowser = mock(QueueBrowser.class);
 
-        BaseJmsKonfig jmsKonfig = mock(BaseJmsKonfig.class);
+        var jmsKonfig = mock(BaseJmsKonfig.class);
         helper = new ExternalTestProducer(jmsKonfig) {
             @Override
             protected JMSContext createContext() {
@@ -54,9 +51,9 @@ public class ExternalSelftestQueueProducerTest {
         when(mockContext.createConsumer(mockQueue)).thenReturn(mockConsumer);
         when(mockContext.createProducer()).thenReturn(mockProducer);
         when(mockContext.createBrowser(mockQueue)).thenReturn(mockBrowser);
-        Connection connection = mock(Connection.class);
-        session = mock(Session.class);
-        MessageProducer messageProducer = mock(MessageProducer.class);
+        var connection = mock(Connection.class);
+        var session = mock(Session.class);
+        var messageProducer = mock(MessageProducer.class);
         when(session.createProducer(any(Queue.class))).thenReturn(messageProducer);
         when(connection.createSession()).thenReturn(session);
 
@@ -75,7 +72,7 @@ public class ExternalSelftestQueueProducerTest {
 
     @Test
     public void test_sendTextMessage() {
-        final JmsMessage build = JmsMessage.builder().withMessage(MSG_TEXT).build();
+        final var build = JmsMessage.builder().withMessage(MSG_TEXT).build();
         helper.sendTextMessage(build);
 
         verify(mockProducer).send(mockQueue, MSG_TEXT);
@@ -84,7 +81,7 @@ public class ExternalSelftestQueueProducerTest {
     @Test
     public void test_sendTextMessageWithProperties() {
 
-        final JmsMessage build = JmsMessage.builder()
+        final var build = JmsMessage.builder()
                 .withMessage(MSG_TEXT)
                 .addHeader("myKey1", "myValue1")
                 .addHeader("myKey2", "myValue2").build();
@@ -97,7 +94,7 @@ public class ExternalSelftestQueueProducerTest {
 
     @Test
     public void test_sendTextMessageWithNullProperties() {
-        final JmsMessage build = JmsMessage.builder().withMessage(MSG_TEXT).build();
+        final var build = JmsMessage.builder().withMessage(MSG_TEXT).build();
         helper.sendTextMessage(build);
 
         verify(mockProducer, never()).setProperty(anyString(), anyString());
@@ -109,7 +106,7 @@ public class ExternalSelftestQueueProducerTest {
         helper.testConnection();
     }
 
-    class ExternalTestProducer extends ExternalQueueProducer {
+    private static class ExternalTestProducer extends ExternalQueueProducer {
 
         ExternalTestProducer(JmsKonfig konfig) {
             super(konfig);

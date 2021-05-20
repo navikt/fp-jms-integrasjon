@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: no.nav.vedtak.felles.integrasjon.jms.QueueConsumerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.428 s - in no.nav.vedtak.felles.integrasjon.jms.QueueConsumerTest

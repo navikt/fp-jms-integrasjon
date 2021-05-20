@@ -8,9 +8,9 @@ class LinearBackoffHandler extends ErrorHandler {
 
     @Override
     public long getNextPauseLengthInMillisecs() {
-        long attempt = getFailedAttempts();
+        var attempt = getFailedAttempts();
         incrementFailedAttempts();
-        long wait = getInitialWait();
+        var wait = getInitialWait();
         wait += Math.multiplyExact(getInitialWait(), Long.min(getMaxFailed(), attempt));
         return wait;
     }

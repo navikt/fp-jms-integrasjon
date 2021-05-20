@@ -41,7 +41,7 @@ public class QueueConsumerManagerImpl implements QueueConsumerManager {
         }
 
         consumerList = new ArrayList<>();
-        for (QueueConsumer consumer : consumersInstance) {
+        for (var consumer : consumersInstance) {
             consumer.setToggleJms(this.toggleJms);
             consumer.setMdcHandler(mdcHandler);
             consumerList.add(consumer);
@@ -60,7 +60,7 @@ public class QueueConsumerManagerImpl implements QueueConsumerManager {
         if (isDisabled()) return;
 
         LOGGER.debug("start ...");
-        for (QueueConsumer consumer : consumerList) {
+        for (var consumer : consumerList) {
             consumer.start();
         }
         LOGGER.info("startet");
@@ -71,7 +71,7 @@ public class QueueConsumerManagerImpl implements QueueConsumerManager {
         if (isDisabled()) return;
 
         LOGGER.debug("stop ...");
-        for (QueueConsumer consumer : consumerList) {
+        for (var consumer : consumerList) {
             consumer.stop();
         }
         LOGGER.info("stoppet");

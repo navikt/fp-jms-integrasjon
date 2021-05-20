@@ -81,12 +81,9 @@ public class QueueConsumerTest {
 
         when(mockPreconditionChecker.check()).thenReturn(PreconditionCheckerResult.fullfilled());
 
-        Answer<Void> pauseAnswer = new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                TimeUnit.MILLISECONDS.sleep(2);
-                return null;
-            }
+        Answer<Void> pauseAnswer = invocation -> {
+            TimeUnit.MILLISECONDS.sleep(2);
+            return null;
         };
         doAnswer(pauseAnswer).when(mockErrorHandlingStrategy).handleExceptionOnCreateContext(any(Exception.class));
         doAnswer(pauseAnswer).when(mockErrorHandlingStrategy).handleUnfulfilledPrecondition(any(String.class));
@@ -99,12 +96,9 @@ public class QueueConsumerTest {
     public void test_start_stop() throws InterruptedException {
 
         // timeout
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                TimeUnit.MILLISECONDS.sleep(50);
-                return null; // tom kø
-            }
+        doAnswer((Answer<Void>) invocation -> {
+            TimeUnit.MILLISECONDS.sleep(50);
+            return null; // tom kø
         }).when(mockJMSConsumer).receive(anyLong());
 
         asyncJmsConsumer.start();
@@ -123,7 +117,7 @@ public class QueueConsumerTest {
     @Test
     public void test_receiveLoop_typical() throws InterruptedException, JMSException {
 
-        final int initialMsgsOnQueue = 3;
+        final var initialMsgsOnQueue = 3;
         mockMessagesOnQueue(initialMsgsOnQueue);
 
         asyncJmsConsumer.start();
@@ -187,7 +181,7 @@ public class QueueConsumerTest {
     @Test
     public void test_receiveLoop_precondNotFulfilled() throws InterruptedException, JMSException {
 
-        final int initialMsgsOnQueue = 2; // men vi skal aldri faktisk lese dem, pga false precond
+        final var initialMsgsOnQueue = 2; // men vi skal aldri faktisk lese dem, pga false precond
         when(mockPreconditionChecker.check()).thenReturn(PreconditionCheckerResult.notFullfilled("Feilmelding"));
 
         asyncJmsConsumer.start();
@@ -245,7 +239,7 @@ public class QueueConsumerTest {
     @Test
     public void test_receiveLoop_exceptionInHandler() throws InterruptedException, JMSException {
 
-        final int initialMsgsOnQueue = 99999999; // slik at vi alltid kaller messageHandler.handle()
+        final var initialMsgsOnQueue = 99999999; // slik at vi alltid kaller messageHandler.handle()
         mockMessagesOnQueue(initialMsgsOnQueue);
         asyncJmsConsumer = new FailingQueueConsumer(konfig) {
             @Override
@@ -299,7 +293,7 @@ public class QueueConsumerTest {
                 return mockJMSContext;
             }
         };
-        JMSProducer jmsProducer = mock(JMSProducer.class);
+        var jmsProducer = mock(JMSProducer.class);
         when(mockJMSContext.createProducer()).thenReturn(jmsProducer);
 
         asyncJmsConsumer.testConnection();
@@ -311,15 +305,14 @@ public class QueueConsumerTest {
     @Test
     public void test_getConnectionEndpoint() throws JMSException {
 
-        BaseJmsKonfig eksternKonfig = new BaseJmsKonfig("qu");
+        BaseJmsKonfig eksternKonfig = new TestJmsKonfig("qu", "someUsername", "myInjectedPassword");
         eksternKonfig.setQueueManagerName("someMgr");
         eksternKonfig.setQueueManagerHostname("someHost");
         eksternKonfig.setQueueManagerPort(9079);
-        eksternKonfig.setQueueManagerUsername("someUser");
         eksternKonfig.setQueueName("someQueue");
 
-        InternalTestQueueConsumer testingAsyncJmsConsumer = new InternalTestQueueConsumer(eksternKonfig);
-        String endpoint = testingAsyncJmsConsumer.getConnectionEndpoint();
+        var testingAsyncJmsConsumer = new InternalTestQueueConsumer(eksternKonfig);
+        var endpoint = testingAsyncJmsConsumer.getConnectionEndpoint();
 
         assertThat(endpoint).contains("someMgr");
         assertThat(endpoint).contains("someHost");
@@ -446,5 +439,32 @@ public class QueueConsumerTest {
             return false;
         }
 
+    }
+
+    private static class TestJmsKonfig extends BaseJmsKonfig {
+        private final String username;
+        private final String password;
+
+        public TestJmsKonfig(String queueKeyPrefix, String username, String password) {
+            super(queueKeyPrefix);
+            this.username = username;
+            this.password = password;
+        }
+
+        public TestJmsKonfig(String queueKeyPrefix, String replyToQueueKeyPrefix, String username, String password) {
+            super(queueKeyPrefix, replyToQueueKeyPrefix);
+            this.username =username;
+            this.password =password;
+        }
+
+        @Override
+        public String getQueueManagerUsername() {
+            return username;
+        }
+
+        @Override
+        public String getQueueManagerPassword() {
+            return password;
+        }
     }
 }

@@ -55,10 +55,10 @@ public class DefaultErrorHandlingStrategyTest {
     }
 
     private void doAndAssertPause(Runnable pausingAction) {
-        long before = System.currentTimeMillis();
+        var before = System.currentTimeMillis();
         pausingAction.run();
-        long after = System.currentTimeMillis();
-        long actualPause = after - before;
+        var after = System.currentTimeMillis();
+        var actualPause = after - before;
         assertThat(actualPause).isGreaterThanOrEqualTo(2000L);
     }
 }

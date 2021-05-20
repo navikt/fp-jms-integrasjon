@@ -1,6 +1,5 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import java.util.Map;
 import java.util.function.Consumer;
 
 import javax.jms.JMSContext;
@@ -39,10 +38,10 @@ public abstract class QueueProducer extends QueueBase {
 
         // TODO (FC) : JMSContext kan caches per tråd i en ThreadLocal for å redusere turnover av ressurser hvis det
         // blir et ytelsesproblem. Bør antagelig da lages nytt ved Exception.
-        try (JMSContext context = createContext()) {
+        try (var context = createContext()) {
             consumer.accept(context);
         } catch (JMSRuntimeException e) {
-            CharSequence mqExceptionDetails = MQExceptionUtil.extract(e);
+            var mqExceptionDetails = MQExceptionUtil.extract(e);
             throw new KritiskJmsException("F-848912 Uventet feil ved håndtering av melding: %s", e, mqExceptionDetails);
         }
     }
@@ -54,7 +53,7 @@ public abstract class QueueProducer extends QueueBase {
     protected void doSendMessage(Message message, JMSContext context) {
         if (isDisabled()) return;
 
-        JMSProducer producer = context.createProducer();
+        var producer = context.createProducer();
         producer.send(getQueue(), message);
     }
 
@@ -65,12 +64,12 @@ public abstract class QueueProducer extends QueueBase {
     protected void doSendTextMessage(JmsMessage message, JMSContext context) {
         if (isDisabled()) return;
 
-        JMSProducer producer = context.createProducer();
+        var producer = context.createProducer();
         if (getKonfig().harReplyToQueue()) {
             registrerReplyToQueue(producer);
         }
         if (message.hasHeaders()) {
-            for (Map.Entry<String, String> entry : message.getHeaders().entrySet()) {
+            for (var entry : message.getHeaders().entrySet()) {
                 producer.setProperty(entry.getKey(), entry.getValue());
             }
         }
@@ -78,9 +77,9 @@ public abstract class QueueProducer extends QueueBase {
     }
 
     private void registrerReplyToQueue(JMSProducer producer) {
-        JmsKonfig konfig = getKonfig();
+        var konfig = getKonfig();
         try {
-            MQQueue replyToQueue = new MQQueue(konfig.getQueueManagerName(), konfig.getReplyToQueueName());
+            var replyToQueue = new MQQueue(konfig.getQueueManagerName(), konfig.getReplyToQueueName());
             producer.setJMSReplyTo(replyToQueue);
         } catch (JMSException e) {
             throw new KritiskJmsException("JMSException ved oppsett av replyTo", e);

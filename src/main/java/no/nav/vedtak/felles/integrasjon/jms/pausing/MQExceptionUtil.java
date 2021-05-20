@@ -14,41 +14,35 @@ public class MQExceptionUtil {
     }
 
     public static CharSequence extract(Exception je) {
-        StringBuilder buf = new StringBuilder(300);
+        var buf = new StringBuilder(300);
 
         // Henter ut kun MQ/JMS meldinger. Resten logges som vanlig Exception med cause.
         Throwable t = je;
         while (t != null) {
 
-            if (t instanceof JMSException) { // NOSONAR
+            if (t instanceof JMSException je1) { // NOSONAR
                 startExceptionLine(je, buf, t);
-                JMSException je1 = (JMSException) t;
                 buf.append(",JMS Errorcode=").append(je1.getErrorCode()); //$NON-NLS-1$
-                if (t instanceof JmsExceptionDetail) { // NOSONAR
-                    JmsExceptionDetail jed = (JmsExceptionDetail) je1;
+                if (t instanceof JmsExceptionDetail jed) { // NOSONAR
                     buf.append(",JMS Explanation=").append(jed.getExplanation()); //$NON-NLS-1$
                     buf.append(",JMS UserAction=").append(jed.getUserAction()); //$NON-NLS-1$
                 }
                 buf.append(';');
-            } else if (t instanceof JMSRuntimeException) { // NOSONAR
+            } else if (t instanceof JMSRuntimeException je1) { // NOSONAR
                 startExceptionLine(je, buf, t);
-                JMSRuntimeException je1 = (JMSRuntimeException) t;
                 buf.append(",JMS ErrorCode=").append(je1.getErrorCode()); //$NON-NLS-1$
-                if (t instanceof JmsExceptionDetail) { // NOSONAR
-                    JmsExceptionDetail jed = (JmsExceptionDetail) je1;
+                if (t instanceof JmsExceptionDetail jed) { // NOSONAR
                     buf.append(",JMS Explanation=").append(jed.getExplanation()); //$NON-NLS-1$
                     buf.append(",JMS UserAction=").append(jed.getUserAction()); //$NON-NLS-1$
                 }
                 buf.append(';');
-            } else if (t instanceof MQException) { // NOSONAR
+            } else if (t instanceof MQException mqe) { // NOSONAR
                 startExceptionLine(je, buf, t);
-                MQException mqe = (MQException) t;
                 buf.append(",WMQ CompletionCode=").append(mqe.getCompCode()); //$NON-NLS-1$
                 buf.append(",WMQ ReasonCode=").append(mqe.getReason()); //$NON-NLS-1$
                 buf.append(';');
-            } else if (t instanceof JmqiException) { // NOSONAR
+            } else if (t instanceof JmqiException jmqie) { // NOSONAR
                 startExceptionLine(je, buf, t);
-                JmqiException jmqie = (JmqiException) t;
                 buf.append(",WMQ LogMessage=").append(jmqie.getWmqLogMessage()); //$NON-NLS-1$
                 buf.append(",WMQ Explanation=").append(jmqie.getWmqMsgExplanation()); //$NON-NLS-1$
                 buf.append(",WMQ MsgSummary=").append(jmqie.getWmqMsgSummary()); //$NON-NLS-1$

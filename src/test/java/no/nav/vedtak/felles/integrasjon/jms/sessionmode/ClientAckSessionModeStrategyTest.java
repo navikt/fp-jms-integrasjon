@@ -24,7 +24,7 @@ public class ClientAckSessionModeStrategyTest {
 
     @Test
     public void test_getSessionMode() {
-        int sessionMode = strategy.getSessionMode();
+        var sessionMode = strategy.getSessionMode();
         assertThat(sessionMode).isEqualTo(JMSContext.CLIENT_ACKNOWLEDGE);
     }
 

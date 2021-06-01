@@ -24,7 +24,6 @@ public class InternalSelftestQueueProducerTest {
 
     private JMSContext mockContext;
     private Queue mockQueue;
-    private JMSConsumer mockConsumer;
     private JMSProducer mockProducer;
     private QueueBrowser mockBrowser;
     private TextMessage mockMessage;
@@ -36,11 +35,11 @@ public class InternalSelftestQueueProducerTest {
 
         mockContext = mock(JMSContext.class);
         mockQueue = mock(Queue.class);
-        mockConsumer = mock(JMSConsumer.class);
+        var mockConsumer = mock(JMSConsumer.class);
         mockProducer = mock(JMSProducer.class);
         mockMessage = mock(TextMessage.class);
         mockBrowser = mock(QueueBrowser.class);
-        BaseJmsKonfig jmsKonfig = mock(BaseJmsKonfig.class);
+        var jmsKonfig = mock(BaseJmsKonfig.class);
         helper = new TestInternalQueueProducer(jmsKonfig) {
             @Override
             protected JMSContext createContext() {
@@ -66,7 +65,7 @@ public class InternalSelftestQueueProducerTest {
 
     @Test
     public void test_sendTextMessage() {
-        final JmsMessage build = JmsMessage.builder().withMessage(MSG_TEXT).build();
+        final var build = JmsMessage.builder().withMessage(MSG_TEXT).build();
         helper.sendTextMessage(build);
 
         verify(mockProducer).send(mockQueue, MSG_TEXT);
@@ -76,7 +75,7 @@ public class InternalSelftestQueueProducerTest {
     public void test_testConnection_queueIsOnAppsQueueMgr() throws JMSException {
 
         @SuppressWarnings("rawtypes")
-        Enumeration mockMsgsEnumeration = mock(Enumeration.class);
+        var mockMsgsEnumeration = mock(Enumeration.class);
         when(mockMsgsEnumeration.hasMoreElements()).thenReturn(true);
         when(mockMsgsEnumeration.nextElement()).thenReturn(mockMessage);
         when(mockBrowser.getEnumeration()).thenReturn(mockMsgsEnumeration);
@@ -89,7 +88,7 @@ public class InternalSelftestQueueProducerTest {
         verify(mockBrowser).close();
     }
 
-    class TestInternalQueueProducer extends InternalQueueProducer {
+    private static class TestInternalQueueProducer extends InternalQueueProducer {
 
         TestInternalQueueProducer(JmsKonfig konfig) {
             super(konfig);

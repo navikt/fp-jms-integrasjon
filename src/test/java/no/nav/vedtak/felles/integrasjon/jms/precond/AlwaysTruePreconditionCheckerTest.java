@@ -8,9 +8,9 @@ public class AlwaysTruePreconditionCheckerTest {
 
     @Test
     public void test_isFulfilled() {
-        AlwaysTruePreconditionChecker checker = new AlwaysTruePreconditionChecker();
+        var checker = new AlwaysTruePreconditionChecker();
 
-        PreconditionCheckerResult checkerResult = checker.check();
+        var checkerResult = checker.check();
         assertThat(checkerResult.isFulfilled()).isTrue();
         assertThat(checkerResult.getErrorMessage().isPresent()).isFalse();
     }

@@ -5,11 +5,11 @@ import java.util.Optional;
 public final class PreconditionCheckerResult {
 
     private boolean isFulfilled;
-    private Optional<String> errorMessage;
+    private String errorMessage;
 
     private PreconditionCheckerResult(boolean isFulfilled, String errorMessage) {
         this.isFulfilled = isFulfilled;
-        this.errorMessage = Optional.ofNullable(errorMessage);
+        this.errorMessage = errorMessage;
     }
 
     public static PreconditionCheckerResult fullfilled() {
@@ -25,6 +25,6 @@ public final class PreconditionCheckerResult {
     }
 
     public Optional<String> getErrorMessage() {
-        return errorMessage;
+        return Optional.ofNullable(errorMessage);
     }
 }

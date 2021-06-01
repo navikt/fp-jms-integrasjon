@@ -1,6 +1,5 @@
 package no.nav.vedtak.felles.integrasjon.jms.precond;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
@@ -24,7 +23,7 @@ public class DefaultDatabaseOppePreconditionChecker implements PreconditionCheck
 
     @Override
     public PreconditionCheckerResult check() {
-        try (Connection connection = dataSource.getConnection()) {
+        try (var connection = dataSource.getConnection()) {
             // Connection pool validerer connections for oss, så trenger ikke gjøre noen spørring her (ønsker
             // bare å se om db er tilgjengelig)
             return PreconditionCheckerResult.fullfilled();

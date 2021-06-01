@@ -30,10 +30,10 @@ public class DefaultDatabaseOppePreconditionCheckerTest {
 
     @Test
     public void test_isFulfilled_dbOppe() throws SQLException {
-        Connection mockConnection = mock(Connection.class);
+        var mockConnection = mock(Connection.class);
         when(mockDataSource.getConnection()).thenReturn(mockConnection);
 
-        PreconditionCheckerResult checkerResult = preconditionChecker.check();
+        var checkerResult = preconditionChecker.check();
         assertThat(checkerResult.isFulfilled()).isTrue();
         assertThat(checkerResult.getErrorMessage().isPresent()).isFalse();
     }
@@ -42,7 +42,7 @@ public class DefaultDatabaseOppePreconditionCheckerTest {
     public void test_isFulfilled_dbNede() throws SQLException {
         when(mockDataSource.getConnection()).thenThrow(new SQLException("ikke-tom-feilmelding"));
 
-        PreconditionCheckerResult checkerResult = preconditionChecker.check();
+        var checkerResult = preconditionChecker.check();
         assertThat(checkerResult.isFulfilled()).isFalse();
         assertThat(checkerResult.getErrorMessage().isPresent()).isTrue();
     }

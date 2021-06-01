@@ -21,8 +21,6 @@ public abstract class QueueBase implements QueueSelftest {
     private ToggleJms toggleJms;
 
     private final JmsKonfig konfig;
-    private final String username;
-    private String password;
     private int sessionMode = JMSContext.CLIENT_ACKNOWLEDGE;
     private ConnectionFactory connectionFactory;
     private Queue queue;
@@ -30,21 +28,16 @@ public abstract class QueueBase implements QueueSelftest {
     public QueueBase() {
         // CDI
         konfig = null;
-        username = null;
     }
 
     public QueueBase(JmsKonfig konfig) {
         Objects.requireNonNull(konfig, "konfig");
         this.konfig = konfig;
-        this.username = konfig.getQueueManagerUsername();
-        this.password = null;
     }
 
     public QueueBase(JmsKonfig konfig, int sessionMode) {
         Objects.requireNonNull(konfig, "konfig");
         this.konfig = konfig;
-        this.username = konfig.getQueueManagerUsername();
-        this.password = null;
         this.sessionMode = sessionMode;
     }
 
@@ -72,7 +65,7 @@ public abstract class QueueBase implements QueueSelftest {
     }
 
     public String getUsername() {
-        return username;
+        return konfig.getQueueManagerUsername();
     }
 
     public int getSessionMode() {
@@ -80,7 +73,7 @@ public abstract class QueueBase implements QueueSelftest {
     }
 
     protected String getPassword() {
-        return password;
+        return konfig.getQueueManagerPassword();
     }
 
     protected ConnectionFactory getConnectionFactory() {

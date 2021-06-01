@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.enterprise.inject.Instance;
 
@@ -32,10 +31,10 @@ public class QueueConsumerManagerImplTest {
     @Test
     public void test_initStartStop() {
 
-        QueueConsumer mockConsumer1 = mock(QueueConsumer.class);
-        QueueConsumer mockConsumer2 = mock(QueueConsumer.class);
-        QueueConsumer mockConsumer3 = mock(QueueConsumer.class);
-        List<QueueConsumer> mockConsumersList = Arrays.asList(mockConsumer1, mockConsumer2, mockConsumer3);
+        var mockConsumer1 = mock(QueueConsumer.class);
+        var mockConsumer2 = mock(QueueConsumer.class);
+        var mockConsumer3 = mock(QueueConsumer.class);
+        var mockConsumersList = Arrays.asList(mockConsumer1, mockConsumer2, mockConsumer3);
         @SuppressWarnings("unchecked")
         Instance<QueueConsumer> mockConsumersInstance = mock(Instance.class);
         when(mockConsumersInstance.iterator()).thenReturn(mockConsumersList.iterator());

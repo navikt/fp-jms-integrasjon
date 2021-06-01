@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.jms.JMSConsumer;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -21,7 +20,6 @@ import no.nav.vedtak.felles.integrasjon.jms.exception.LoggerUtils;
 import no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategy;
 import no.nav.vedtak.felles.integrasjon.jms.precond.AlwaysTruePreconditionChecker;
 import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionChecker;
-import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionCheckerResult;
 import no.nav.vedtak.felles.integrasjon.jms.sessionmode.ClientAckSessionModeStrategy;
 import no.nav.vedtak.felles.integrasjon.jms.sessionmode.SessionModeStrategy;
 
@@ -83,7 +81,7 @@ public abstract class QueueConsumer extends QueueBase {
 
     public Message receiveMessage(JMSContext context, Queue queue, long timeoutMillisecs) {
         Message message;
-        try (JMSConsumer consumer = context.createConsumer(queue)) {
+        try (var consumer = context.createConsumer(queue)) {
             message = consumer.receive(timeoutMillisecs);
         }
 
@@ -108,7 +106,7 @@ public abstract class QueueConsumer extends QueueBase {
     }
 
     private void waitUntilStartedAndRunning() {
-        int secs = 4;
+        var secs = 4;
         try {
             if (!startSemaphore.tryAcquire(secs, TimeUnit.SECONDS) || !receiveLoop.isRunning()) {
                 log.warn("Klarte ikke å starte tråd etter {} s", secs);
@@ -175,12 +173,12 @@ public abstract class QueueConsumer extends QueueBase {
             startSemaphore.release();
 
             while (!stopReceiveLoop.get()) {
-                try (JMSContext context = createContext()) {
+                try (var context = createContext()) {
                     if (logger.isDebugEnabled()) {
                         log.debug("Laget ny context: {}", LoggerUtils.toStringWithoutLineBreaks(getKonfig())); //$NON-NLS-1$ //NOSONAR
                     }
                     getErrorHandlingStrategy().resetStateForExceptionOnCreateContext();
-                    boolean shouldKeepContext = true;
+                    var shouldKeepContext = true;
                     while (shouldKeepContext && !stopReceiveLoop.get()) {
                         shouldKeepContext = receiveAndHandleOneMessageAndShallKeepContext(context);
                     }
@@ -198,7 +196,7 @@ public abstract class QueueConsumer extends QueueBase {
 
         boolean receiveAndHandleOneMessageAndShallKeepContext(JMSContext context) {
 
-            PreconditionCheckerResult checkerResult = getPreconditionChecker().check();
+            var checkerResult = getPreconditionChecker().check();
             if (!checkerResult.isFulfilled()) {
                 getErrorHandlingStrategy().handleUnfulfilledPrecondition(checkerResult.getErrorMessage().orElse("Ukjent feilmelding"));
                 return true;
@@ -248,8 +246,8 @@ public abstract class QueueConsumer extends QueueBase {
 
         private void logReceivingMessage(Message message) throws JMSException {
             // tar ikke med callId her, kommer automatisk med i log format
-            String messageId = message.getJMSMessageID();
-            String correlationId = message.getJMSCorrelationID();
+            var messageId = message.getJMSMessageID();
+            var correlationId = message.getJMSCorrelationID();
             log.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}",
                     getKonfig().getQueueName(),
                     getKonfig().getQueueManagerChannelName(),
@@ -265,7 +263,7 @@ public abstract class QueueConsumer extends QueueBase {
 
         void initCallId(Message message) throws JMSException {
             if (mdcHandler != null) {
-                String callId = message.getStringProperty("callId");
+                var callId = message.getStringProperty("callId");
                 if (callId != null) {
                     // set callId fra melding hvis eksisterer
                     mdcHandler.setCallId(callId);

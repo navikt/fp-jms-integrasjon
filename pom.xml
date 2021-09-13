@@ -18,7 +18,7 @@
         <additionalparam>-Xdoclint:none</additionalparam> <!-- TODO: Skru på doclint igjen... -->
         <argLine>-Dfile.encoding=UTF-8</argLine>
 
-        <junit5.version>5.7.2</junit5.version>
+        <junit5.version>5.8.0</junit5.version>
 
     </properties>
 

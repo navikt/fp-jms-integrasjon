@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>no.nav.vedtak.felles.familie-jms-integrasjon</groupId>
+    <groupId>no.nav.vedtak.felles.fp-jms-integrasjon</groupId>
     <artifactId>jms-integrasjon</artifactId>
     <version>2.0.17-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -23,9 +23,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</connection>
-        <developerConnection>scm:git:https://github.com/navikt/familie-jms-integrasjon.git</developerConnection>   
-        <url>https://github.com/navikt/familie-jms-integrasjon/</url>
+        <connection>scm:git:https://github.com/navikt/fp-jms-integrasjon.git</connection>
+        <developerConnection>scm:git:https://github.com/navikt/fp-jms-integrasjon.git</developerConnection>
+        <url>https://github.com/navikt/fp-jms-integrasjon/</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -154,7 +154,7 @@
         <repository>
             <id>github</id>
             <name>Github navikt Maven Packages</name>
-            <url>https://maven.pkg.github.com/navikt/familie-jms-integrasjon</url>
+            <url>https://maven.pkg.github.com/navikt/fp-jms-integrasjon</url>
         </repository>
     </distributionManagement>
 </project>

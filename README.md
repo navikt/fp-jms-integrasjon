@@ -1,2 +1,2 @@
-Inneholder jms-integrasjonskode som deles mellom Foreldrepenger/K9/familie.
+Inneholder jms-integrasjonskode som deles mellom Foreldrepengers applikasjoner
 

@@ -7,6 +7,7 @@ import javax.jms.JMSException;
 /**
  * Baseklasse for sending av meldinger til "interne" køer (dvs. fysisk på samme MQ server som VL bruker).
  */
+// FIXME MS: Brukes ikke noe sted, skjønner ikke helt forskjellen mellom intern og ekstern kø.
 public abstract class InternalQueueProducer extends QueueProducer {
 
     public InternalQueueProducer() {

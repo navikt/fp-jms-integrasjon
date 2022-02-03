@@ -1,35 +1,33 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import no.nav.vedtak.felles.integrasjon.jms.exception.KritiskJmsException;
-
 /**
- * Definerer konfig for en JMS meldingskø.
- * Bruke {@link Named} for å identifisere en gitt queue konfigurasjon.
+ * Gir konfigurasjonsverdier felles for alle meldingskøer brukt i VL.
+ * I praksis går disse verdiene på forbindelsen til selve MQ-serveren som VL bruker.
+ * </p>
+ * <p>
+ * De enkelte meldingskøene har sin konkrete sub-klasse, med konfigurasjonsverdier for selve køen.
  */
-public interface JmsKonfig {
+record JmsKonfig(String queueManagerHost,
+                 int queueManagerPort,
+                 String queueManagerName,
+                 String queueManagerChannelName,
+                 String queueManagerUsername,
+                 String queueManagerPassword,
+                 String queueName,
+                 String replyToQueueName) {
 
-    String getQueueManagerChannelName();
-
-    String getQueueManagerHostname();
-
-    String getQueueManagerName();
-
-    int getQueueManagerPort();
-
-    default String getQueueManagerUsername() {
-        throw new KritiskJmsException("F-620269 Required method getQueueManagerUsername not implemented.");
+    public boolean harReplyToQueue() {
+        return replyToQueueName() != null;
     }
 
-    default String getQueueManagerPassword() {
-        throw new KritiskJmsException("F-620270 Required method getQueueManagerPassword not implemented.");
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "<"
+            + ", queue=" + queueManagerName()
+            + ", channel=" + queueManagerChannelName()
+            + ", host=" + queueManagerHost()
+            + ", port" + queueManagerPort()
+            + ", username=" + queueManagerUsername()
+            + ">";
     }
-
-    String getQueueName();
-
-    boolean harReplyToQueue();
-
-    String getReplyToQueueName();
-
-
-
 }

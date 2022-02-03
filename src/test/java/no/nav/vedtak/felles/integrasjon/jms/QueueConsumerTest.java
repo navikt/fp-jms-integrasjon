@@ -54,7 +54,7 @@ public class QueueConsumerTest {
 
     @BeforeEach
     public void setup() throws JMSException {
-        konfig = mock(JmsKonfig.class);
+        konfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
         mockJMSContext = mock(JMSContext.class);
         mockQueue = mock(Queue.class);
         mockJMSConsumer = mock(JMSConsumer.class);
@@ -305,19 +305,19 @@ public class QueueConsumerTest {
     @Test
     public void test_getConnectionEndpoint() throws JMSException {
 
-        BaseJmsKonfig eksternKonfig = new TestJmsKonfig("qu", "someUsername", "myInjectedPassword");
-        eksternKonfig.setQueueManagerName("someMgr");
-        eksternKonfig.setQueueManagerHostname("someHost");
-        eksternKonfig.setQueueManagerPort(9079);
-        eksternKonfig.setQueueName("someQueue");
+        var host = "someHost";
+        var port = 9097;
+        var someMgr = "someMgr";
+        var queue = "someQueue";
+        JmsKonfig eksternKonfig = new JmsKonfig(host, port, someMgr, null, "someUsername", "myInjectedPassword", queue, null);
 
         var testingAsyncJmsConsumer = new InternalTestQueueConsumer(eksternKonfig);
         var endpoint = testingAsyncJmsConsumer.getConnectionEndpoint();
 
-        assertThat(endpoint).contains("someMgr");
-        assertThat(endpoint).contains("someHost");
-        assertThat(endpoint).contains("9079");
-        assertThat(endpoint).contains("someQueue");
+        assertThat(endpoint).contains(someMgr);
+        assertThat(endpoint).contains(host);
+        assertThat(endpoint).contains(String.valueOf(port));
+        assertThat(endpoint).contains(queue);
     }
 
     // ----------------------
@@ -439,32 +439,5 @@ public class QueueConsumerTest {
             return false;
         }
 
-    }
-
-    private static class TestJmsKonfig extends BaseJmsKonfig {
-        private final String username;
-        private final String password;
-
-        public TestJmsKonfig(String queueKeyPrefix, String username, String password) {
-            super(queueKeyPrefix);
-            this.username = username;
-            this.password = password;
-        }
-
-        public TestJmsKonfig(String queueKeyPrefix, String replyToQueueKeyPrefix, String username, String password) {
-            super(queueKeyPrefix, replyToQueueKeyPrefix);
-            this.username =username;
-            this.password =password;
-        }
-
-        @Override
-        public String getQueueManagerUsername() {
-            return username;
-        }
-
-        @Override
-        public String getQueueManagerPassword() {
-            return password;
-        }
     }
 }

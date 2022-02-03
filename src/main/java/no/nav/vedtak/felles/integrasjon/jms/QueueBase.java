@@ -48,8 +48,8 @@ public abstract class QueueBase implements QueueSelftest {
     @Override
     public String getConnectionEndpoint() {
         return String.format("%s@%s (%s:%d)", // NOSONAR
-                getKonfig().getQueueName(), getKonfig().getQueueManagerName(),
-                getKonfig().getQueueManagerHostname(), getKonfig().getQueueManagerPort());
+                getKonfig().queueName(), getKonfig().queueManagerName(),
+                getKonfig().queueManagerHost(), getKonfig().queueManagerPort());
     }
 
     protected void setConnectionFactory(ConnectionFactory connectionFactory) {
@@ -65,7 +65,7 @@ public abstract class QueueBase implements QueueSelftest {
     }
 
     public String getUsername() {
-        return konfig.getQueueManagerUsername();
+        return konfig.queueManagerUsername();
     }
 
     public int getSessionMode() {
@@ -73,7 +73,7 @@ public abstract class QueueBase implements QueueSelftest {
     }
 
     protected String getPassword() {
-        return konfig.getQueueManagerPassword();
+        return konfig.queueManagerPassword();
     }
 
     protected ConnectionFactory getConnectionFactory() {

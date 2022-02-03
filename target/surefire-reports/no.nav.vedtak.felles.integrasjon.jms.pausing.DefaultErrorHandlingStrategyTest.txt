@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategyTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.122 s - in no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategyTest

@@ -32,3 +32,4 @@ integrasjon/*/target/*
 
 failsafe-summary.xml
 .flattened
+target

@@ -79,7 +79,7 @@ public abstract class QueueProducer extends QueueBase {
     private void registrerReplyToQueue(JMSProducer producer) {
         var konfig = getKonfig();
         try {
-            var replyToQueue = new MQQueue(konfig.getQueueManagerName(), konfig.getReplyToQueueName());
+            var replyToQueue = new MQQueue(konfig.queueManagerName(), konfig.replyToQueueName());
             producer.setJMSReplyTo(replyToQueue);
         } catch (JMSException e) {
             throw new KritiskJmsException("JMSException ved oppsett av replyTo", e);

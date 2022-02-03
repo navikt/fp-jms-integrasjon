@@ -40,7 +40,7 @@ public class ExternalSelftestQueueProducerTest {
         mockMessage = mock(TextMessage.class);
         var mockBrowser = mock(QueueBrowser.class);
 
-        var jmsKonfig = mock(BaseJmsKonfig.class);
+        var jmsKonfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
         helper = new ExternalTestProducer(jmsKonfig) {
             @Override
             protected JMSContext createContext() {

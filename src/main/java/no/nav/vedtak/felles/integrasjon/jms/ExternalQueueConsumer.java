@@ -8,6 +8,7 @@ import javax.jms.JMSException;
  * <p>
  * (Dette krever en annen implementasjon av selftest enn for interne køer.)
  */
+// FIXME MS: Brukes ikke noe sted, skjønner ikke helt forskjellen mellom intern og ekstern kø.
 public abstract class ExternalQueueConsumer extends QueueConsumer {
 
     public ExternalQueueConsumer() {

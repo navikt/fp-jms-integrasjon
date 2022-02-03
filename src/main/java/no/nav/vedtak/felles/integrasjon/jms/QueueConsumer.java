@@ -249,8 +249,8 @@ public abstract class QueueConsumer extends QueueBase {
             var messageId = message.getJMSMessageID();
             var correlationId = message.getJMSCorrelationID();
             log.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}",
-                    getKonfig().getQueueName(),
-                    getKonfig().getQueueManagerChannelName(),
+                    getKonfig().queueName(),
+                    getKonfig().queueManagerChannelName(),
                     messageId,
                     correlationId);
         }
@@ -295,7 +295,7 @@ public abstract class QueueConsumer extends QueueBase {
                 // ikke logg mer enn 1 gang per minutt
                 if (timeoutMillis > 0 && timeoutCount.incrementAndGet() % ((60 * 1000L) / timeoutMillis) == 0 && log.isDebugEnabled()) {
                     log.debug("Timeout - ingen melding mottatt siden {} på JMS queue: {}", sistMottatt, //$NON-NLS-1$
-                            LoggerUtils.removeLineBreaks(getKonfig().getQueueName())); // NOSONAR
+                            LoggerUtils.removeLineBreaks(getKonfig().queueName())); // NOSONAR
                 }
             } else {
                 mottattMelding();

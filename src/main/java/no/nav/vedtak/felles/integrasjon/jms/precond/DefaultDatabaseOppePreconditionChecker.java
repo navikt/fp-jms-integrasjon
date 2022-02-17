@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.sql.DataSource;
 
 @ApplicationScoped
+@Deprecated(forRemoval = true, since = "2.1") // Flytt til applikasjon, bør ikke ha referanse til JNDI ressurs her.
 public class DefaultDatabaseOppePreconditionChecker implements PreconditionChecker {
 
     @Resource(mappedName = "jdbc/defaultDS")

@@ -7,6 +7,7 @@ import javax.jms.JMSException;
 /**
  * Baseklasse for meldingsdrevne beans for "interne" køer (dvs. fysisk på samme MQ server som VL bruker).
  */
+@Deprecated(forRemoval = true, since = "2.1") // Bruk ExternalQueueConsumer
 public abstract class InternalQueueConsumer extends QueueConsumer {
 
     public InternalQueueConsumer() {

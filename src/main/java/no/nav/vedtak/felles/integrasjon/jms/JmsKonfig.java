@@ -7,7 +7,7 @@ package no.nav.vedtak.felles.integrasjon.jms;
  * <p>
  * De enkelte meldingskøene har sin konkrete sub-klasse, med konfigurasjonsverdier for selve køen.
  */
-record JmsKonfig(String queueManagerHost,
+public record JmsKonfig(String queueManagerHost,
                  int queueManagerPort,
                  String queueManagerName,
                  String queueManagerChannelName,

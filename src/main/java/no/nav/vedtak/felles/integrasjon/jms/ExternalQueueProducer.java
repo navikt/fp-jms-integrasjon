@@ -1,6 +1,6 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 /**
  * Baseklasse for sending av meldinger til "eksterne" køer (dvs. fysisk på annen MQ server enn VL bruker).</p>

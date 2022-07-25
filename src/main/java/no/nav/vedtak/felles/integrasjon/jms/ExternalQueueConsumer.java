@@ -1,6 +1,6 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 /**
  * Baseklasse for meldingsdrevne beans for "eksterne" køer (dvs. fysisk på annen MQ server enn VL bruker).

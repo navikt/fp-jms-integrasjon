@@ -2,7 +2,7 @@ package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.Enumeration;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 /**
  * Baseklasse for meldingsdrevne beans for "interne" køer (dvs. fysisk på samme MQ server som VL bruker).

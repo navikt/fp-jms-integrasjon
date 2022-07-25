@@ -2,13 +2,13 @@ package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.function.Consumer;
 
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.JMSProducer;
-import javax.jms.JMSRuntimeException;
-import javax.jms.Message;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.Message;
 
-import com.ibm.mq.jms.MQQueue;
+import com.ibm.mq.jakarta.jms.MQQueue;
 
 import no.nav.vedtak.felles.integrasjon.jms.exception.KritiskJmsException;
 import no.nav.vedtak.felles.integrasjon.jms.pausing.MQExceptionUtil;

@@ -1,11 +1,11 @@
 package no.nav.vedtak.felles.integrasjon.jms.pausing;
 
-import javax.jms.JMSException;
-import javax.jms.JMSRuntimeException;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSRuntimeException;
 
 import com.ibm.mq.MQException;
 import com.ibm.mq.jmqi.JmqiException;
-import com.ibm.msg.client.jms.JmsExceptionDetail;
+import com.ibm.msg.client.jakarta.jms.JmsExceptionDetail;
 
 public class MQExceptionUtil {
 

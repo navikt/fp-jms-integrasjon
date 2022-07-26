@@ -1,6 +1,6 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 /**
  * Metoder for å understøtte selftest av en meldingskø.

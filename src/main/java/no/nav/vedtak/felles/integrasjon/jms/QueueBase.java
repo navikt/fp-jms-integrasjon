@@ -2,9 +2,9 @@ package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.Objects;
 
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSContext;
-import javax.jms.Queue;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.JMSContext;
+import jakarta.jms.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

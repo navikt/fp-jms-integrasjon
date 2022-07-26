@@ -1,8 +1,8 @@
 package no.nav.vedtak.felles.integrasjon.jms.sessionmode;
 
-import javax.jms.JMSContext;
-import javax.jms.Message;
-import javax.jms.Queue;
+import jakarta.jms.JMSContext;
+import jakarta.jms.Message;
+import jakarta.jms.Queue;
 
 /**
  * @deprecated TODO (rune) Denne klassen er en "last resort" hvis vi ikke får client-ack til å virke på JBoss.

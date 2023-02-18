@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public final class PreconditionCheckerResult {
 
-    private boolean isFulfilled;
-    private String errorMessage;
+    private final boolean isFulfilled;
+    private final String errorMessage;
 
     private PreconditionCheckerResult(boolean isFulfilled, String errorMessage) {
         this.isFulfilled = isFulfilled;

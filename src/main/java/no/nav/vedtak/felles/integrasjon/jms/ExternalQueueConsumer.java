@@ -3,13 +3,9 @@ package no.nav.vedtak.felles.integrasjon.jms;
 import jakarta.jms.JMSException;
 
 /**
- * Baseklasse for meldingsdrevne beans for "eksterne" køer (dvs. fysisk på annen MQ server enn VL bruker).
- * </p>
- * <p>
- * (Dette krever en annen implementasjon av selftest enn for interne køer.)
+ * Baseklasse for meldingsdrevne beans for køer.
  */
-// FIXME MS: Brukes ikke noe sted, skjønner ikke helt forskjellen mellom intern og ekstern kø.
-public abstract class ExternalQueueConsumer extends QueueConsumer {
+public abstract class ExternalQueueConsumer extends QueueConsumerBase {
 
     public ExternalQueueConsumer() {
     }

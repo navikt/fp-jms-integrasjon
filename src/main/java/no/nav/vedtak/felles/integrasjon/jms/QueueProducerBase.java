@@ -16,16 +16,16 @@ import no.nav.vedtak.felles.integrasjon.jms.pausing.MQExceptionUtil;
 /**
  * Baseklasse for klienter som skriver meldinger til kø.
  */
-public abstract class QueueProducer extends QueueBase {
+public abstract class QueueProducerBase extends QueueBase {
 
-    public QueueProducer() {
+    public QueueProducerBase() {
     }
 
-    public QueueProducer(JmsKonfig konfig) {
+    public QueueProducerBase(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueProducer(JmsKonfig konfig, int sessionMode) {
+    public QueueProducerBase(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 

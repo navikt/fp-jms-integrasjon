@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("resource")
-public class ExternalSelftestQueueProducerTest {
+public class ExternalSelftestQueueProducerTestBase {
     private static final String MSG_TEXT = "beskjeden";
     private ExternalQueueProducer helper; // the object we're testing
     private JMSContext mockContext;

@@ -3,11 +3,9 @@ package no.nav.vedtak.felles.integrasjon.jms;
 import jakarta.jms.JMSException;
 
 /**
- * Baseklasse for sending av meldinger til "eksterne" køer (dvs. fysisk på annen MQ server enn VL bruker).</p>
- * <p>
- * (Dette krever en annen implementasjon av selftest enn for interne køer.)
+ * Baseklasse for sending av meldinger til køer.
  */
-public abstract class ExternalQueueProducer extends QueueProducer {
+public abstract class ExternalQueueProducer extends QueueProducerBase {
 
     public ExternalQueueProducer() {
     }

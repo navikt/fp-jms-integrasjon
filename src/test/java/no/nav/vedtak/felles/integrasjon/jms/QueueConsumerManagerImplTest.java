@@ -31,12 +31,12 @@ public class QueueConsumerManagerImplTest {
     @Test
     public void test_initStartStop() {
 
-        var mockConsumer1 = mock(QueueConsumer.class);
-        var mockConsumer2 = mock(QueueConsumer.class);
-        var mockConsumer3 = mock(QueueConsumer.class);
+        var mockConsumer1 = mock(QueueConsumerBase.class);
+        var mockConsumer2 = mock(QueueConsumerBase.class);
+        var mockConsumer3 = mock(QueueConsumerBase.class);
         var mockConsumersList = Arrays.asList(mockConsumer1, mockConsumer2, mockConsumer3);
         @SuppressWarnings("unchecked")
-        Instance<QueueConsumer> mockConsumersInstance = mock(Instance.class);
+        Instance<QueueConsumerBase> mockConsumersInstance = mock(Instance.class);
         when(mockConsumersInstance.iterator()).thenReturn(mockConsumersList.iterator());
 
         manager.initConsumers(mockConsumersInstance, null, null);

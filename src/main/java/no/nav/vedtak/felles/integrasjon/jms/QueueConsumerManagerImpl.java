@@ -19,13 +19,13 @@ public class QueueConsumerManagerImpl implements QueueConsumerManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QueueConsumerManagerImpl.class);
 
-    private List<QueueConsumer> consumerList;
+    private List<QueueConsumerBase> consumerList;
 
     private ToggleJms toggleJms;
 
     // Får inn (indirekte) liste over alle beans av type QueueConsumer
     @Inject
-    public void initConsumers(@Any Instance<QueueConsumer> consumersInstance, Instance<ToggleJms> toggleJms, Instance<MdcHandler> mdcHandlers) { // NOSONAR Joda, kalles av CDI
+    public void initConsumers(@Any Instance<QueueConsumerBase> consumersInstance, Instance<ToggleJms> toggleJms, Instance<MdcHandler> mdcHandlers) { // NOSONAR Joda, kalles av CDI
         if (toggleJms == null || toggleJms.isUnsatisfied()) {
             LOGGER.info("Ingen ToggleJms er tilgjengelig, JMS blir dermed værende på");
         } else {

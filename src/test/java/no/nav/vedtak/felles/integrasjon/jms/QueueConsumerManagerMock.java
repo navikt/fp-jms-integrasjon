@@ -21,7 +21,7 @@ public class QueueConsumerManagerMock extends QueueConsumerManagerImpl {
     // Får inn (indirekte) liste over alle beans av type QueueConsumer
     @Override
     @Inject
-    public void initConsumers(@SuppressWarnings("unused") @Any Instance<QueueConsumer> consumersInstance, Instance<ToggleJms> toggleJms, Instance<MdcHandler> mdcHandlers) { // NOSONAR Joda, kalles av CDI
+    public void initConsumers(@SuppressWarnings("unused") @Any Instance<QueueConsumerBase> consumersInstance, Instance<ToggleJms> toggleJms, Instance<MdcHandler> mdcHandlers) { // NOSONAR Joda, kalles av CDI
         LOGGER.info("invoked: initConsumers - Starter ikke opp MQ consumer");
     }
 

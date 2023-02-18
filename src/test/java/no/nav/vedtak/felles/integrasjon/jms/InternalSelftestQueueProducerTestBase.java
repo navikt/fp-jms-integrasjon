@@ -1,26 +1,15 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Enumeration;
-
-import jakarta.jms.JMSConsumer;
-import jakarta.jms.JMSContext;
-import jakarta.jms.JMSException;
-import jakarta.jms.JMSProducer;
-import jakarta.jms.Queue;
-import jakarta.jms.QueueBrowser;
-import jakarta.jms.TextMessage;
-
+import jakarta.jms.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("resource")
-public class InternalSelftestQueueProducerTest {
+import static org.mockito.Mockito.*;
 
-    private InternalQueueProducer helper; // the object we're testing
+@SuppressWarnings("resource")
+public class InternalSelftestQueueProducerTestBase {
+
+    private ExternalQueueProducer helper; // the object we're testing
 
     private JMSContext mockContext;
     private Queue mockQueue;
@@ -79,24 +68,7 @@ public class InternalSelftestQueueProducerTest {
         verify(mockProducer).send(mockQueue, MSG_TEXT);
     }
 
-    @Test
-    public void test_testConnection_queueIsOnAppsQueueMgr() throws JMSException {
-
-        @SuppressWarnings("rawtypes")
-        var mockMsgsEnumeration = mock(Enumeration.class);
-        when(mockMsgsEnumeration.hasMoreElements()).thenReturn(true);
-        when(mockMsgsEnumeration.nextElement()).thenReturn(mockMessage);
-        when(mockBrowser.getEnumeration()).thenReturn(mockMsgsEnumeration);
-
-        helper.testConnection();
-
-        verify(mockBrowser).getEnumeration();
-        verify(mockMsgsEnumeration).hasMoreElements();
-        verify(mockMsgsEnumeration).nextElement();
-        verify(mockBrowser).close();
-    }
-
-    private static class TestInternalQueueProducer extends InternalQueueProducer {
+    private static class TestInternalQueueProducer extends ExternalQueueProducer {
 
         TestInternalQueueProducer(JmsKonfig konfig) {
             super(konfig);

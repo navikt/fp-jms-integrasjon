@@ -29,7 +29,7 @@ import no.nav.vedtak.felles.integrasjon.jms.sessionmode.SessionModeStrategy;
  *
  * @see <a href="https://confluence.adeo.no/pages/viewpage.action?pageId=218415758">Asynkron lesing fra meldingskø</a>
  */
-public abstract class QueueConsumer extends QueueBase {
+public abstract class QueueConsumerBase extends QueueBase {
 
     private static final long RECEIVE_TIMEOUT_MS = 300; // Ikke sett denne for lang - vil forsinke shutdown
     private static final long EXECUTOR_SHUTDOWN_TIMEOUT_MS = 10000;
@@ -43,14 +43,14 @@ public abstract class QueueConsumer extends QueueBase {
 
     private MdcHandler mdcHandler;
 
-    public QueueConsumer() {
+    public QueueConsumerBase() {
     }
 
-    public QueueConsumer(JmsKonfig konfig) {
+    public QueueConsumerBase(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueConsumer(JmsKonfig konfig, int sessionMode) {
+    public QueueConsumerBase(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 

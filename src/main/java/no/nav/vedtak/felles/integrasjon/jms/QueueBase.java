@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * og uavhengig om den er "intern" (fysisk på samme MQ server som VL bruker)
  * eller "ekstern" (fysisk på annen MQ server enn VL bruker).
  */
-public abstract class QueueBase implements QueueSelftest {
+abstract class QueueBase implements QueueSelftest {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 

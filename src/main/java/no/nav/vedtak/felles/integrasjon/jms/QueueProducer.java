@@ -5,16 +5,16 @@ import jakarta.jms.JMSException;
 /**
  * Baseklasse for sending av meldinger til køer.
  */
-public abstract class ExternalQueueProducer extends QueueProducerBase {
+public abstract class QueueProducer extends QueueProducerBase {
 
-    public ExternalQueueProducer() {
+    public QueueProducer() {
     }
 
-    public ExternalQueueProducer(JmsKonfig konfig) {
+    public QueueProducer(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public ExternalQueueProducer(JmsKonfig konfig, int sessionMode) {
+    public QueueProducer(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 

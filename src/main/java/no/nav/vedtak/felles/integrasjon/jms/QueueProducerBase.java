@@ -2,14 +2,13 @@ package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.function.Consumer;
 
+import com.ibm.mq.jakarta.jms.MQQueue;
+
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
 import jakarta.jms.Message;
-
-import com.ibm.mq.jakarta.jms.MQQueue;
-
 import no.nav.vedtak.felles.integrasjon.jms.exception.KritiskJmsException;
 import no.nav.vedtak.felles.integrasjon.jms.pausing.MQExceptionUtil;
 
@@ -34,7 +33,9 @@ abstract class QueueProducerBase extends QueueBase {
     }
 
     protected void doWithContext(Consumer<JMSContext> consumer) {
-        if (isDisabled()) return;
+        if (isDisabled()) {
+            return;
+        }
 
         // TODO (FC) : JMSContext kan caches per tråd i en ThreadLocal for å redusere turnover av ressurser hvis det
         // blir et ytelsesproblem. Bør antagelig da lages nytt ved Exception.
@@ -51,7 +52,9 @@ abstract class QueueProducerBase extends QueueBase {
     }
 
     protected void doSendMessage(Message message, JMSContext context) {
-        if (isDisabled()) return;
+        if (isDisabled()) {
+            return;
+        }
 
         var producer = context.createProducer();
         producer.send(getQueue(), message);
@@ -62,7 +65,9 @@ abstract class QueueProducerBase extends QueueBase {
     }
 
     protected void doSendTextMessage(JmsMessage message, JMSContext context) {
-        if (isDisabled()) return;
+        if (isDisabled()) {
+            return;
+        }
 
         var producer = context.createProducer();
         if (getKonfig().harReplyToQueue()) {

@@ -4,10 +4,10 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import jakarta.jms.JMSContext;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import jakarta.jms.JMSContext;
 
 @SuppressWarnings("resource")
 public class ClientAckSessionModeStrategyTest {

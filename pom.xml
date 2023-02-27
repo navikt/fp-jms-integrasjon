@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.nav.vedtak.felles.fp-jms-integrasjon</groupId>
     <artifactId>jms-integrasjon</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>JMS-integrasjon for foreldrepenger</name>
+    <name>JMS-integrasjon for Foreldrepenger</name>
 
     <properties>
         <java.version>17</java.version>
@@ -39,12 +39,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.6</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

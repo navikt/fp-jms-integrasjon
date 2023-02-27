@@ -7,6 +7,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import jakarta.jms.Connection;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -18,13 +21,10 @@ import jakarta.jms.QueueBrowser;
 import jakarta.jms.Session;
 import jakarta.jms.TextMessage;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 @SuppressWarnings("resource")
 public class ExternalSelftestQueueProducerTestBase {
     private static final String MSG_TEXT = "beskjeden";
-    private ExternalQueueProducer helper; // the object we're testing
+    private QueueProducer helper; // the object we're testing
     private JMSContext mockContext;
     private Queue mockQueue;
     private JMSProducer mockProducer;
@@ -41,7 +41,7 @@ public class ExternalSelftestQueueProducerTestBase {
         var mockBrowser = mock(QueueBrowser.class);
 
         var jmsKonfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
-        helper = new ExternalTestProducer(jmsKonfig) {
+        helper = new TestProducer(jmsKonfig) {
             @Override
             protected JMSContext createContext() {
                 return mockContext;
@@ -81,10 +81,7 @@ public class ExternalSelftestQueueProducerTestBase {
     @Test
     public void test_sendTextMessageWithProperties() {
 
-        final var build = JmsMessage.builder()
-                .withMessage(MSG_TEXT)
-                .addHeader("myKey1", "myValue1")
-                .addHeader("myKey2", "myValue2").build();
+        final var build = JmsMessage.builder().withMessage(MSG_TEXT).addHeader("myKey1", "myValue1").addHeader("myKey2", "myValue2").build();
         helper.sendTextMessage(build);
 
         verify(mockProducer).setProperty("myKey1", "myValue1");
@@ -106,9 +103,9 @@ public class ExternalSelftestQueueProducerTestBase {
         helper.testConnection();
     }
 
-    private static class ExternalTestProducer extends ExternalQueueProducer {
+    private static class TestProducer extends QueueProducer {
 
-        ExternalTestProducer(JmsKonfig konfig) {
+        TestProducer(JmsKonfig konfig) {
             super(konfig);
         }
 

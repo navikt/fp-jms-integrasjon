@@ -1,21 +1,36 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import jakarta.jms.*;
-import no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategy;
-import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionChecker;
-import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionCheckerResult;
-import no.nav.vedtak.felles.integrasjon.jms.sessionmode.SessionModeStrategy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.Message;
+import jakarta.jms.Queue;
+import jakarta.jms.QueueBrowser;
+import jakarta.jms.TextMessage;
+import no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategy;
+import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionChecker;
+import no.nav.vedtak.felles.integrasjon.jms.precond.PreconditionCheckerResult;
+import no.nav.vedtak.felles.integrasjon.jms.sessionmode.SessionModeStrategy;
 
 @SuppressWarnings("resource")
 public class QueueConsumerBaseTest {
@@ -256,7 +271,7 @@ public class QueueConsumerBaseTest {
     @Test
     public void test_testConnection_queueIsOnOtherQueueMgr() throws JMSException {
 
-        asyncJmsConsumer = new ExternalTestQueueConsumer(konfig) {
+        asyncJmsConsumer = new TestQueueConsumer(konfig) {
             @Override
             protected JMSContext createContext() {
                 return mockJMSContext;
@@ -309,7 +324,7 @@ public class QueueConsumerBaseTest {
         }).when(mockJMSConsumer).receive(anyLong());
     }
 
-    class InternalTestQueueConsumer extends ExternalQueueConsumer {
+    class InternalTestQueueConsumer extends QueueConsumer {
 
         public InternalTestQueueConsumer(JmsKonfig konfig) {
             super(konfig);
@@ -342,9 +357,9 @@ public class QueueConsumerBaseTest {
         }
     }
 
-    class ExternalTestQueueConsumer extends ExternalQueueConsumer {
+    class TestQueueConsumer extends QueueConsumer {
 
-        public ExternalTestQueueConsumer(JmsKonfig konfig) {
+        public TestQueueConsumer(JmsKonfig konfig) {
             super(konfig);
             this.setQueue(mockQueue);
         }
@@ -376,7 +391,7 @@ public class QueueConsumerBaseTest {
 
     }
 
-    class FailingQueueConsumer extends ExternalQueueConsumer {
+    class FailingQueueConsumer extends QueueConsumer {
 
         public FailingQueueConsumer(JmsKonfig konfig) {
             super(konfig);

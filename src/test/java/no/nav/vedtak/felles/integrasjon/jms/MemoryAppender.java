@@ -22,9 +22,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
     }
 
     public boolean contains(String string, Level level) {
-        return this.list.stream()
-                .anyMatch(event -> event.getMessage().contains(string)
-                        && event.getLevel().equals(level));
+        return this.list.stream().anyMatch(event -> event.getMessage().contains(string) && event.getLevel().equals(level));
     }
 
     public int countEventsForLogger() {
@@ -32,15 +30,11 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
     }
 
     public int countEventsForLogger(String loggerName) {
-        return (int) this.list.stream()
-                .filter(event -> event.getLoggerName().contains(loggerName))
-                .count();
+        return (int) this.list.stream().filter(event -> event.getLoggerName().contains(loggerName)).count();
     }
 
     public List<ILoggingEvent> search(String string) {
-        return this.list.stream()
-                .filter(event -> event.getMessage().contains(string))
-                .collect(Collectors.toList());
+        return this.list.stream().filter(event -> event.getMessage().contains(string)).collect(Collectors.toList());
     }
 
     public List<ILoggingEvent> searchInfo(String string) {
@@ -48,10 +42,7 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
     }
 
     public List<ILoggingEvent> search(String string, Level level) {
-        return this.list.stream()
-                .filter(event -> event.getMessage().contains(string)
-                        && event.getLevel().equals(level))
-                .collect(Collectors.toList());
+        return this.list.stream().filter(event -> event.getMessage().contains(string) && event.getLevel().equals(level)).collect(Collectors.toList());
     }
 
     public int getSize() {
@@ -63,15 +54,11 @@ public class MemoryAppender extends ListAppender<ILoggingEvent> {
     }
 
     public long countEntries(String substring) {
-        return list.stream()
-                .map(ILoggingEvent.class::cast)
-                .filter(e -> eventMatches(e, substring)).count();
+        return list.stream().map(ILoggingEvent.class::cast).filter(e -> eventMatches(e, substring)).count();
     }
 
     private static boolean eventMatches(ILoggingEvent event, String substring) {
-        return Optional.ofNullable(substring)
-                .filter(s -> event.getFormattedMessage().contains(s))
-                .isPresent();
+        return Optional.ofNullable(substring).filter(s -> event.getFormattedMessage().contains(s)).isPresent();
 
     }
 

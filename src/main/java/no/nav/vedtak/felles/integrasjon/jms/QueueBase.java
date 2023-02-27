@@ -2,17 +2,15 @@ package no.nav.vedtak.felles.integrasjon.jms;
 
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Queue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * Felleskode for å bruke meldingskøer, uavhengig om køen leses eller skrives,
- * og uavhengig om den er "intern" (fysisk på samme MQ server som VL bruker)
- * eller "ekstern" (fysisk på annen MQ server enn VL bruker).
+ * Felleskode for å bruke meldingskøer, uavhengig om køen leses eller skrives.
  */
 abstract class QueueBase implements QueueSelftest {
 
@@ -48,8 +46,7 @@ abstract class QueueBase implements QueueSelftest {
     @Override
     public String getConnectionEndpoint() {
         return String.format("%s@%s (%s:%d)", // NOSONAR
-                getKonfig().queueName(), getKonfig().queueManagerName(),
-                getKonfig().queueManagerHost(), getKonfig().queueManagerPort());
+            getKonfig().queueName(), getKonfig().queueManagerName(), getKonfig().queueManagerHost(), getKonfig().queueManagerPort());
     }
 
     protected void setConnectionFactory(ConnectionFactory connectionFactory) {
@@ -90,10 +87,7 @@ abstract class QueueBase implements QueueSelftest {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "<"
-                + "konfig=" + konfig
-                + ", sessionMode=" + sessionMode
-                + ">";
+        return getClass().getSimpleName() + "<" + "konfig=" + konfig + ", sessionMode=" + sessionMode + ">";
     }
 
 }

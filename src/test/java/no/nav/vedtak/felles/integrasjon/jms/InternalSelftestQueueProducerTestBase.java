@@ -1,15 +1,24 @@
 package no.nav.vedtak.felles.integrasjon.jms;
 
-import jakarta.jms.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+import jakarta.jms.JMSConsumer;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
+import jakarta.jms.Queue;
+import jakarta.jms.QueueBrowser;
+import jakarta.jms.TextMessage;
 
 @SuppressWarnings("resource")
 public class InternalSelftestQueueProducerTestBase {
 
-    private ExternalQueueProducer helper; // the object we're testing
+    private QueueProducer helper; // the object we're testing
 
     private JMSContext mockContext;
     private Queue mockQueue;
@@ -28,14 +37,7 @@ public class InternalSelftestQueueProducerTestBase {
         mockProducer = mock(JMSProducer.class);
         mockMessage = mock(TextMessage.class);
         mockBrowser = mock(QueueBrowser.class);
-        var jmsKonfig = new JmsKonfig("host",
-            0,
-            "manager",
-            "channel",
-            "user",
-            "pass",
-            "queue",
-            null);
+        var jmsKonfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
 
         helper = new TestInternalQueueProducer(jmsKonfig) {
             @Override
@@ -68,7 +70,7 @@ public class InternalSelftestQueueProducerTestBase {
         verify(mockProducer).send(mockQueue, MSG_TEXT);
     }
 
-    private static class TestInternalQueueProducer extends ExternalQueueProducer {
+    private static class TestInternalQueueProducer extends QueueProducer {
 
         TestInternalQueueProducer(JmsKonfig konfig) {
             super(konfig);

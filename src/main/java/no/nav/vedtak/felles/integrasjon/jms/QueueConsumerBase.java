@@ -8,14 +8,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.Queue;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import no.nav.vedtak.felles.integrasjon.jms.exception.LoggerUtils;
 import no.nav.vedtak.felles.integrasjon.jms.pausing.DefaultErrorHandlingStrategy;
 import no.nav.vedtak.felles.integrasjon.jms.precond.AlwaysTruePreconditionChecker;
@@ -90,7 +89,9 @@ abstract class QueueConsumerBase extends QueueBase {
     }
 
     public void start() {
-        if (isDisabled()) return;
+        if (isDisabled()) {
+            return;
+        }
 
         if (executorService != null) {
             log.warn("receive loop allerede startet.");
@@ -122,7 +123,9 @@ abstract class QueueConsumerBase extends QueueBase {
     }
 
     public void stop() {
-        if (isDisabled()) return;
+        if (isDisabled()) {
+            return;
+        }
 
         if (executorService == null) {
             log.warn("receive loop ikke startet.");
@@ -163,7 +166,9 @@ abstract class QueueConsumerBase extends QueueBase {
 
         @Override
         public void run() {
-            if (isDisabled()) return;
+            if (isDisabled()) {
+                return;
+            }
 
             if (logger.isInfoEnabled()) {
                 logger.info("startet JMS: {}", LoggerUtils.toStringWithoutLineBreaks(getKonfig())); //$NON-NLS-1$ //NOSONAR
@@ -248,11 +253,8 @@ abstract class QueueConsumerBase extends QueueBase {
             // tar ikke med callId her, kommer automatisk med i log format
             var messageId = message.getJMSMessageID();
             var correlationId = message.getJMSCorrelationID();
-            log.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}",
-                    getKonfig().queueName(),
-                    getKonfig().queueManagerChannelName(),
-                    messageId,
-                    correlationId);
+            log.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}", getKonfig().queueName(),
+                getKonfig().queueManagerChannelName(), messageId, correlationId);
         }
 
         void resetCallid() {
@@ -295,7 +297,7 @@ abstract class QueueConsumerBase extends QueueBase {
                 // ikke logg mer enn 1 gang per minutt
                 if (timeoutMillis > 0 && timeoutCount.incrementAndGet() % ((60 * 1000L) / timeoutMillis) == 0 && log.isDebugEnabled()) {
                     log.debug("Timeout - ingen melding mottatt siden {} på JMS queue: {}", sistMottatt, //$NON-NLS-1$
-                            LoggerUtils.removeLineBreaks(getKonfig().queueName())); // NOSONAR
+                        LoggerUtils.removeLineBreaks(getKonfig().queueName())); // NOSONAR
                 }
             } else {
                 mottattMelding();

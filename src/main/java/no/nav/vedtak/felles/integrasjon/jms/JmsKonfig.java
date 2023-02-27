@@ -7,14 +7,8 @@ package no.nav.vedtak.felles.integrasjon.jms;
  * <p>
  * De enkelte meldingskøene har sin konkrete sub-klasse, med konfigurasjonsverdier for selve køen.
  */
-public record JmsKonfig(String queueManagerHost,
-                 int queueManagerPort,
-                 String queueManagerName,
-                 String queueManagerChannelName,
-                 String queueManagerUsername,
-                 String queueManagerPassword,
-                 String queueName,
-                 String replyToQueueName) {
+public record JmsKonfig(String queueManagerHost, int queueManagerPort, String queueManagerName, String queueManagerChannelName,
+                        String queueManagerUsername, String queueManagerPassword, String queueName, String replyToQueueName) {
 
     public boolean harReplyToQueue() {
         return replyToQueueName() != null;
@@ -22,12 +16,7 @@ public record JmsKonfig(String queueManagerHost,
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "<"
-            + ", queue=" + queueManagerName()
-            + ", channel=" + queueManagerChannelName()
-            + ", host=" + queueManagerHost()
-            + ", port" + queueManagerPort()
-            + ", username=" + queueManagerUsername()
-            + ">";
+        return getClass().getSimpleName() + "<" + ", queue=" + queueManagerName() + ", channel=" + queueManagerChannelName() + ", host="
+            + queueManagerHost() + ", port" + queueManagerPort() + ", username=" + queueManagerUsername() + ">";
     }
 }

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>no.nav.foreldrepenger.felles.fp-jms-integrasjon</groupId>
+    <groupId>no.nav.foreldrepenger.felles</groupId>
     <artifactId>jms-integrasjon</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>

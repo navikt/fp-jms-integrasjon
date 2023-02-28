@@ -28,7 +28,7 @@ import no.nav.foreldrepenger.felles.jms.sessionmode.SessionModeStrategy;
  *
  * @see <a href="https://confluence.adeo.no/pages/viewpage.action?pageId=218415758">Asynkron lesing fra meldingskø</a>
  */
-abstract class QueueConsumerBase extends QueueBase {
+public abstract class QueueConsumerBase extends QueueBase {
 
     private static final long RECEIVE_TIMEOUT_MS = 300; // Ikke sett denne for lang - vil forsinke shutdown
     private static final long EXECUTOR_SHUTDOWN_TIMEOUT_MS = 10000;

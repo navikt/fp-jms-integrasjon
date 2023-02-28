@@ -15,7 +15,7 @@ import no.nav.foreldrepenger.felles.jms.pausing.MQExceptionUtil;
 /**
  * Baseklasse for klienter som skriver meldinger til kø.
  */
-abstract class QueueProducerBase extends QueueBase {
+public abstract class QueueProducerBase extends QueueBase {
 
     public QueueProducerBase() {
     }

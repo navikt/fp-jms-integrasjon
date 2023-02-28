@@ -12,7 +12,7 @@ import jakarta.jms.Queue;
 /**
  * Felleskode for å bruke meldingskøer, uavhengig om køen leses eller skrives.
  */
-abstract class QueueBase implements QueueSelftest {
+public abstract class QueueBase implements QueueSelftest {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 

@@ -42,14 +42,14 @@ public abstract class QueueConsumerBase extends QueueBase {
 
     private MdcHandler mdcHandler;
 
-    public QueueConsumerBase() {
+    protected QueueConsumerBase() {
     }
 
-    public QueueConsumerBase(JmsKonfig konfig) {
+    protected QueueConsumerBase(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueConsumerBase(JmsKonfig konfig, int sessionMode) {
+    protected QueueConsumerBase(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 
@@ -94,7 +94,7 @@ public abstract class QueueConsumerBase extends QueueBase {
         }
 
         if (executorService != null) {
-            log.warn("receive loop allerede startet.");
+            LOG.warn("receive loop allerede startet.");
             return;
         }
         getErrorHandlingStrategy().resetStateForAll();
@@ -110,11 +110,11 @@ public abstract class QueueConsumerBase extends QueueBase {
         var secs = 4;
         try {
             if (!startSemaphore.tryAcquire(secs, TimeUnit.SECONDS) || !receiveLoop.isRunning()) {
-                log.warn("Klarte ikke å starte tråd etter {} s", secs);
+                LOG.warn("Klarte ikke å starte tråd etter {} s", secs);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            log.warn("Klarte ikke å starte tråd etter {} s", secs);
+            LOG.warn("Klarte ikke å starte tråd etter {} s", secs);
         }
     }
 
@@ -128,7 +128,7 @@ public abstract class QueueConsumerBase extends QueueBase {
         }
 
         if (executorService == null) {
-            log.warn("receive loop ikke startet.");
+            LOG.warn("receive loop ikke startet.");
             return;
         }
         receiveLoop.stopReceiveLoop();
@@ -136,10 +136,10 @@ public abstract class QueueConsumerBase extends QueueBase {
             executorService.shutdown();
             executorService.awaitTermination(EXECUTOR_SHUTDOWN_TIMEOUT_MS, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) { // NOSONAR
-            log.warn("feil ved stopping av receive loop: awaitTermination avbrutt.");
+            LOG.warn("feil ved stopping av receive loop: awaitTermination avbrutt.");
         } finally {
             if (!executorService.isTerminated()) {
-                log.warn("feil ved stopping av receive loop: executorService ikke terminert - gjør shutdownNow()");
+                LOG.warn("feil ved stopping av receive loop: executorService ikke terminert - gjør shutdownNow()");
                 executorService.shutdownNow();
             }
             executorService = null;
@@ -180,7 +180,7 @@ public abstract class QueueConsumerBase extends QueueBase {
             while (!stopReceiveLoop.get()) {
                 try (var context = createContext()) {
                     if (logger.isDebugEnabled()) {
-                        log.debug("Laget ny context: {}", LoggerUtils.toStringWithoutLineBreaks(getKonfig())); //$NON-NLS-1$ //NOSONAR
+                        LOG.debug("Laget ny context: {}", LoggerUtils.toStringWithoutLineBreaks(getKonfig())); //$NON-NLS-1$ //NOSONAR
                     }
                     getErrorHandlingStrategy().resetStateForExceptionOnCreateContext();
                     var shouldKeepContext = true;
@@ -243,7 +243,6 @@ public abstract class QueueConsumerBase extends QueueBase {
                     // ...men bruk (ytre) e i backoff/logging nedenfor
                 }
                 getErrorHandlingStrategy().handleExceptionOnHandle(e);
-                return;
             } finally {
                 resetCallid();
             }
@@ -253,8 +252,10 @@ public abstract class QueueConsumerBase extends QueueBase {
             // tar ikke med callId her, kommer automatisk med i log format
             var messageId = message.getJMSMessageID();
             var correlationId = message.getJMSCorrelationID();
-            log.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}", getKonfig().queueName(),
-                getKonfig().queueManagerChannelName(), messageId, correlationId);
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Mottar melding. QueueName={}, Channel={}, MessageId={}, CorrelationId={}", getKonfig().queueName(),
+                    getKonfig().queueManagerChannelName(), messageId, correlationId);
+            }
         }
 
         void resetCallid() {
@@ -295,8 +296,8 @@ public abstract class QueueConsumerBase extends QueueBase {
             if (message == null) {
                 timeout();
                 // ikke logg mer enn 1 gang per minutt
-                if (timeoutMillis > 0 && timeoutCount.incrementAndGet() % ((60 * 1000L) / timeoutMillis) == 0 && log.isDebugEnabled()) {
-                    log.debug("Timeout - ingen melding mottatt siden {} på JMS queue: {}", sistMottatt, //$NON-NLS-1$
+                if (timeoutMillis > 0 && timeoutCount.incrementAndGet() % ((60 * 1000L) / timeoutMillis) == 0 && LOG.isDebugEnabled()) {
+                    LOG.debug("Timeout - ingen melding mottatt siden {} på JMS queue: {}", sistMottatt, //$NON-NLS-1$
                         LoggerUtils.removeLineBreaks(getKonfig().queueName())); // NOSONAR
                 }
             } else {

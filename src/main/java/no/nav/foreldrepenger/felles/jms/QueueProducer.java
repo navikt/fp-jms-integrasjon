@@ -7,14 +7,14 @@ import jakarta.jms.JMSException;
  */
 public abstract class QueueProducer extends QueueProducerBase {
 
-    public QueueProducer() {
+    protected QueueProducer() {
     }
 
-    public QueueProducer(JmsKonfig konfig) {
+    protected QueueProducer(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueProducer(JmsKonfig konfig, int sessionMode) {
+    protected QueueProducer(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 

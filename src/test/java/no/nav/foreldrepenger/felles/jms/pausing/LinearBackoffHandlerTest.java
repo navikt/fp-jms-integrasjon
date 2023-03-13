@@ -22,10 +22,10 @@ class LinearBackoffHandlerTest {
 
         backoffHandler = new NoBackoffHandler();
 
-        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isEqualTo(0);
-        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isEqualTo(0);
-        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isEqualTo(0);
-        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isEqualTo(0);
+        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isZero();
+        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isZero();
+        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isZero();
+        assertThat(backoffHandler.getNextPauseLengthInMillisecs()).isZero();
     }
 
     @Test

@@ -17,14 +17,14 @@ import no.nav.foreldrepenger.felles.jms.pausing.MQExceptionUtil;
  */
 public abstract class QueueProducerBase extends QueueBase {
 
-    public QueueProducerBase() {
+    protected QueueProducerBase() {
     }
 
-    public QueueProducerBase(JmsKonfig konfig) {
+    protected QueueProducerBase(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueProducerBase(JmsKonfig konfig, int sessionMode) {
+    protected QueueProducerBase(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 
@@ -37,7 +37,7 @@ public abstract class QueueProducerBase extends QueueBase {
             return;
         }
 
-        // TODO (FC) : JMSContext kan caches per tråd i en ThreadLocal for å redusere turnover av ressurser hvis det
+        // TODO (MS) : JMSContext kan caches per tråd i en ThreadLocal for å redusere turnover av ressurser hvis det
         // blir et ytelsesproblem. Bør antagelig da lages nytt ved Exception.
         try (var context = createContext()) {
             consumer.accept(context);
@@ -48,7 +48,7 @@ public abstract class QueueProducerBase extends QueueBase {
     }
 
     public void sendMessage(Message message) {
-        doWithContext((ctx) -> doSendMessage(message, ctx));
+        doWithContext(ctx -> doSendMessage(message, ctx));
     }
 
     protected void doSendMessage(Message message, JMSContext context) {
@@ -61,7 +61,7 @@ public abstract class QueueProducerBase extends QueueBase {
     }
 
     public void sendTextMessage(JmsMessage message) {
-        doWithContext((ctx) -> doSendTextMessage(message, ctx));
+        doWithContext(ctx -> doSendTextMessage(message, ctx));
     }
 
     protected void doSendTextMessage(JmsMessage message, JMSContext context) {

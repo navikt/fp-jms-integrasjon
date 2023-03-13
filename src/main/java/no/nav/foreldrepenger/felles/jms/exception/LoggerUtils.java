@@ -7,7 +7,7 @@ public class LoggerUtils {
     }
 
     public static String removeLineBreaks(String string) {
-        return string != null ? string.replaceAll("(\\r|\\n)", "") : null;
+        return string != null ? string.replaceAll("\\R", "") : null;
     }
 
     public static String toStringWithoutLineBreaks(Object object) {

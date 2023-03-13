@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class DefaultErrorHandlingStrategy {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultErrorHandlingStrategy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultErrorHandlingStrategy.class);
 
     private ErrorHandler backoffHandlerExceptionOnCreateContext;
     private ErrorHandler backoffHandlerUnfulfilledPrecondition;
@@ -37,13 +37,13 @@ public class DefaultErrorHandlingStrategy {
 
     public void handleExceptionOnCreateContext(Exception e) {
         var mqErrorText = MQExceptionUtil.extract(e);
-        logger.error("F-158357 Klarte ikke å connecte til MQ server: " + mqErrorText, e);
+        LOG.error("F-158357 Klarte ikke å connecte til MQ server: {}", mqErrorText);
         var pauseLength = backoffHandlerExceptionOnCreateContext.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
 
     public void handleUnfulfilledPrecondition(String errorMessage) {
-        logger.error("F-310549 Precondition ikke oppfyllt: {}", errorMessage);
+        LOG.error("F-310549 Precondition ikke oppfyllt: {}", errorMessage);
         var pauseLength = backoffHandlerUnfulfilledPrecondition.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
@@ -55,7 +55,7 @@ public class DefaultErrorHandlingStrategy {
 
     public void handleExceptionOnReceive(Exception e) {
         var mqErrorText = MQExceptionUtil.extract(e);
-        logger.error("F-266229 Uventet feil ved mottak av melding: {}", mqErrorText, e);
+        LOG.error("F-266229 Uventet feil ved mottak av melding: {}", mqErrorText, e);
         var pauseLength = backoffHandlerExceptionOnReceive.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
@@ -66,7 +66,7 @@ public class DefaultErrorHandlingStrategy {
 
     public void handleExceptionOnHandle(Exception e) {
         var mqErrorText = MQExceptionUtil.extract(e);
-        logger.error("F-848912 Uventet feil ved håndtering av melding: {}", mqErrorText, e);
+        LOG.error("F-848912 Uventet feil ved håndtering av melding: {}", mqErrorText, e);
         var pauseLength = backoffHandlerExceptionOnHandle.getNextPauseLengthInMillisecs();
         pauseMillisecs(pauseLength);
     }
@@ -76,11 +76,11 @@ public class DefaultErrorHandlingStrategy {
     }
 
     protected void pauseMillisecs(long millisecs) {
-        logger.debug("Pause {} millisecs", millisecs);
+        LOG.debug("Pause {} millisecs", millisecs);
         try {
             TimeUnit.MILLISECONDS.sleep(millisecs);
         } catch (InterruptedException e) { //NOSONAR Ikke thread shutdown som pågår her
-            logger.error("F-551390 Pausing avbrutt");
+            LOG.error("F-551390 Pausing avbrutt");
         }
     }
 }

@@ -7,14 +7,14 @@ import jakarta.jms.JMSException;
  */
 public abstract class QueueConsumer extends QueueConsumerBase {
 
-    public QueueConsumer() {
+    protected QueueConsumer() {
     }
 
-    public QueueConsumer(JmsKonfig konfig) {
+    protected QueueConsumer(JmsKonfig konfig) {
         super(konfig);
     }
 
-    public QueueConsumer(JmsKonfig konfig, int sessionMode) {
+    protected QueueConsumer(JmsKonfig konfig, int sessionMode) {
         super(konfig, sessionMode);
     }
 

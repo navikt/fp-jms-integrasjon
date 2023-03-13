@@ -8,5 +8,5 @@
 
 # fp-jms-integrasjon
 
-Inneholder jms-integrasjonskode som deles mellom Foreldrepengers applikasjoner
+Inneholder JMS - integrasjonskode som deles mellom Foreldrepengers applikasjoner (fp-sak og fp-tilbake)
 

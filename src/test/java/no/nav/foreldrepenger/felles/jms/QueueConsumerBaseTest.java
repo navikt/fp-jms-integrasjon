@@ -13,8 +13,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.concurrent.TimeUnit;
 
-import no.nav.foreldrepenger.felles.jms.pausing.DefaultErrorHandlingStrategy;
-import no.nav.foreldrepenger.felles.jms.precond.PreconditionChecker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -29,11 +27,12 @@ import jakarta.jms.Message;
 import jakarta.jms.Queue;
 import jakarta.jms.QueueBrowser;
 import jakarta.jms.TextMessage;
+import no.nav.foreldrepenger.felles.jms.pausing.DefaultErrorHandlingStrategy;
+import no.nav.foreldrepenger.felles.jms.precond.PreconditionChecker;
 import no.nav.foreldrepenger.felles.jms.precond.PreconditionCheckerResult;
 import no.nav.foreldrepenger.felles.jms.sessionmode.SessionModeStrategy;
 
-@SuppressWarnings("resource")
-public class QueueConsumerBaseTest {
+class QueueConsumerBaseTest {
 
     private static final int SLEEP = 200;
 
@@ -51,7 +50,7 @@ public class QueueConsumerBaseTest {
     private JmsKonfig konfig;
 
     @BeforeEach
-    public void setup() throws JMSException {
+    void setup() throws JMSException {
         konfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
         mockJMSContext = mock(JMSContext.class);
         mockQueue = mock(Queue.class);
@@ -91,7 +90,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_start_stop() throws InterruptedException {
+    void test_start_stop() throws InterruptedException {
 
         // timeout
         doAnswer((Answer<Void>) invocation -> {
@@ -113,7 +112,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_receiveLoop_typical() throws InterruptedException, JMSException {
+    void test_receiveLoop_typical() throws InterruptedException, JMSException {
 
         final var initialMsgsOnQueue = 3;
         mockMessagesOnQueue(initialMsgsOnQueue);
@@ -143,7 +142,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_receiveLoop_exceptionWhenCreatingContext() throws InterruptedException, JMSException {
+    void test_receiveLoop_exceptionWhenCreatingContext() throws InterruptedException, JMSException {
 
         asyncJmsConsumer = new InternalTestQueueConsumer(konfig) {
             @Override
@@ -177,7 +176,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_receiveLoop_precondNotFulfilled() throws InterruptedException, JMSException {
+    void test_receiveLoop_precondNotFulfilled() throws InterruptedException, JMSException {
 
         final var initialMsgsOnQueue = 2; // men vi skal aldri faktisk lese dem, pga false precond
         when(mockPreconditionChecker.check()).thenReturn(PreconditionCheckerResult.notFullfilled("Feilmelding"));
@@ -207,7 +206,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_receiveLoop_exceptionWhenReceivingMessage() throws InterruptedException, JMSException {
+    void test_receiveLoop_exceptionWhenReceivingMessage() throws InterruptedException, JMSException {
 
         when(mockJMSConsumer.receive(anyLong())).thenThrow(new JMSRuntimeException("!!!!"));
 
@@ -235,7 +234,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_receiveLoop_exceptionInHandler() throws InterruptedException, JMSException {
+    void test_receiveLoop_exceptionInHandler() throws InterruptedException, JMSException {
 
         final var initialMsgsOnQueue = 99999999; // slik at vi alltid kaller messageHandler.handle()
         mockMessagesOnQueue(initialMsgsOnQueue);
@@ -269,7 +268,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_testConnection_queueIsOnOtherQueueMgr() throws JMSException {
+    void test_testConnection_queueIsOnOtherQueueMgr() throws JMSException {
 
         asyncJmsConsumer = new TestQueueConsumer(konfig) {
             @Override
@@ -287,7 +286,7 @@ public class QueueConsumerBaseTest {
     }
 
     @Test
-    public void test_getConnectionEndpoint() throws JMSException {
+    void test_getConnectionEndpoint() throws JMSException {
 
         var host = "someHost";
         var port = 9097;

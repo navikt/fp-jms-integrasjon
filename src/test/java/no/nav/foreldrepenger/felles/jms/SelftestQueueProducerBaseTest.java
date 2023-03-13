@@ -22,7 +22,7 @@ import jakarta.jms.Session;
 import jakarta.jms.TextMessage;
 
 @SuppressWarnings("resource")
-class SelftestQueueProducerTestBase {
+class SelftestQueueProducerBaseTest {
     private static final String MSG_TEXT = "beskjeden";
     private QueueProducer helper; // the object we're testing
     private JMSContext mockContext;

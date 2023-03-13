@@ -14,7 +14,7 @@ import jakarta.jms.Queue;
  */
 public abstract class QueueBase implements QueueSelftest {
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    protected static final Logger LOG = LoggerFactory.getLogger(QueueBase.class);
 
     private ToggleJms toggleJms;
 
@@ -23,17 +23,17 @@ public abstract class QueueBase implements QueueSelftest {
     private ConnectionFactory connectionFactory;
     private Queue queue;
 
-    public QueueBase() {
+    protected QueueBase() {
         // CDI
         konfig = null;
     }
 
-    public QueueBase(JmsKonfig konfig) {
+    protected QueueBase(JmsKonfig konfig) {
         Objects.requireNonNull(konfig, "konfig");
         this.konfig = konfig;
     }
 
-    public QueueBase(JmsKonfig konfig, int sessionMode) {
+    protected QueueBase(JmsKonfig konfig, int sessionMode) {
         Objects.requireNonNull(konfig, "konfig");
         this.konfig = konfig;
         this.sessionMode = sessionMode;

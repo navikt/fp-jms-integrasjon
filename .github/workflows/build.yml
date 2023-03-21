@@ -10,7 +10,7 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - 'CODEOWNERS'
-      - 'dokumentasjon/**'
+      - 'docs/**'
       - 'lokalutvikling/**'
   schedule:
     - cron: '0 4 * * 2'

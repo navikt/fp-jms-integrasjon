@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <argLine>-Xms256m -Dlog.level.no.nav=INFO -Dfile.encoding=${project.build.sourceEncoding}</argLine>
 
-        <junit.version>5.9.2</junit.version>
+        <junit.version>5.9.3</junit.version>
 
         <!-- Sonar felles -->
         <sonar.organization>navikt</sonar.organization>
@@ -129,7 +129,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <!-- Må ha @{argLine} ellers blir properties satt av jacoco-maven-plugin overkrevet -->
                         <argLine>@{argLine} ${argLine}</argLine>
@@ -138,7 +138,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.9</version>
+                    <version>0.8.10</version>
                     <configuration>
                         <excludes>
                             <exclude>**/*no/nav*/**Test.class</exclude>

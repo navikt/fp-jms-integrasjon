@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import com.ibm.msg.client.jakarta.jms.internal.JmsContextImpl;
+
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -52,7 +54,7 @@ class QueueConsumerBaseTest {
     @BeforeEach
     void setup() throws JMSException {
         konfig = new JmsKonfig("host", 0, "manager", "channel", "user", "pass", "queue", null);
-        mockJMSContext = mock(JMSContext.class);
+        mockJMSContext = mock(JmsContextImpl.class);
         mockQueue = mock(Queue.class);
         mockJMSConsumer = mock(JMSConsumer.class);
         mockQueueBrowser = mock(QueueBrowser.class);

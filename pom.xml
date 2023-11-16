@@ -64,6 +64,11 @@
             <!-- oppdaterer versjon for å bli kvitt CVE-2023-34455 CVE-2023-34454 CVE-2023-34453 -->
             <version>1.1.10.5</version>
         </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.14.9</version>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>

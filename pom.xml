@@ -193,9 +193,9 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.jboss.jandex</groupId>
+                    <groupId>io.smallrye</groupId>
                     <artifactId>jandex-maven-plugin</artifactId>
-                    <version>1.2.3</version>
+                    <version>3.1.5</version>
                     <executions>
                         <execution>
                             <id>make-index</id>
@@ -204,6 +204,9 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <indexVersion>10</indexVersion>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -240,7 +243,7 @@
 
         <plugins>
             <plugin>
-                <groupId>org.jboss.jandex</groupId>
+                <groupId>io.smallrye</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
             </plugin>
             <plugin>

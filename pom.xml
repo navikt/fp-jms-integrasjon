@@ -25,7 +25,7 @@
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
         <sonar.projectName>fp-jms-integrasjon</sonar.projectName>
         <sonar.projectKey>navikt_fp-jms-integrasjon</sonar.projectKey>
-        <bcprov-jdk18on.version>1.78.1</bcprov-jdk18on.version>
+        <bcprov-jdk18on.version>1.79</bcprov-jdk18on.version>
     </properties>
 
     <scm>

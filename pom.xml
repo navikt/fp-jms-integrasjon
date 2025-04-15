@@ -18,6 +18,7 @@
         <argLine>-Xms256m -Dlog.level.no.nav=INFO -Dfile.encoding=${project.build.sourceEncoding}</argLine>
 
         <junit.version>5.12.2</junit.version>
+        <mockito.version>5.17.0</mockito.version>
 
         <!-- Sonar felles -->
         <sonar.organization>navikt</sonar.organization>
@@ -86,6 +87,12 @@
             <version>1.17.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.17.5</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -114,7 +121,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.17.0</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -136,6 +143,7 @@
                         <target>${java.version}</target>
                         <encoding>UTF-8</encoding>
                         <release>${java.version}</release>
+                        <proc>none</proc>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -172,7 +180,9 @@
                     <version>3.5.3</version>
                     <configuration>
                         <!-- Må ha @{argLine} ellers blir properties satt av jacoco-maven-plugin overkrevet -->
-                        <argLine>@{argLine} ${argLine}</argLine>
+                        <argLine>@{argLine} ${argLine}
+                            -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+                        </argLine>
                     </configuration>
                 </plugin>
                 <plugin>

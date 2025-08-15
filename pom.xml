@@ -18,7 +18,7 @@
         <argLine>-Xms256m -Dlog.level.no.nav=INFO -Dfile.encoding=${project.build.sourceEncoding}</argLine>
 
         <junit.version>5.13.4</junit.version>
-        <mockito.version>5.18.0</mockito.version>
+        <mockito.version>5.19.0</mockito.version>
 
         <!-- Sonar felles -->
         <sonar.organization>navikt</sonar.organization>
